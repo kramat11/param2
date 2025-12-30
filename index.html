@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instalive Tools • Pro Edition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>♾️</text></svg>">
+  <style>
+    :root {
+      /* Light Mode Colors */
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #8b5cf6;
+      --accent: #ec4899;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      
+      /* Background Colors */
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+      --bg-card: #ffffff;
+      
+      /* Text Colors */
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --text-tertiary: #94a3b8;
+      
+      /* Border Colors */
+      --border-light: #e2e8f0;
+      --border-medium: #cbd5e1;
+      --border-dark: #94a3b8;
+      
+      /* Shadow Colors */
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      
+      /* Gradients */
+      --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+      --gradient-secondary: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+      --gradient-accent: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+      --gradient-success: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+    }
+    
+    [data-theme="dark"] {
+      /* Dark Mode Colors */
+      --primary: #818cf8;
+      --primary-dark: #6366f1;
+      --secondary: #a78bfa;
+      --accent: #f472b6;
+      --success: #34d399;
+      --warning: #fbbf24;
+      --danger: #f87171;
+      
+      /* Background Colors */
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-tertiary: #334155;
+      --bg-card: #1e293b;
+      
+      /* Text Colors */
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --text-tertiary: #94a3b8;
+      
+      /* Border Colors */
+      --border-light: #334155;
+      --border-medium: #475569;
+      --border-dark: #64748b;
+      
+      /* Shadow Colors */
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+      
+      /* Gradients */
+      --gradient-primary: linear-gradient(135deg, #818cf8 0%, #a78bfa 50%, #f472b6 100%);
+      --gradient-secondary: linear-gradient(135deg, #60a5fa 0%, #22d3ee 100%);
+      --gradient-accent: linear-gradient(135deg, #fbbf24 0%, #f87171 100%);
+      --gradient-success: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+    }
+    
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+    
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding: 20px 10px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      transition: background 0.3s, color 0.3s;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    
+    input, textarea {
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+    }
+    
+    /* Header controls */
+    .header-controls {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .theme-toggle {
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: 50px;
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: var(--shadow-md);
+    }
+    
+    .theme-toggle-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+    
+    .theme-toggle-btn.active {
+      background: var(--gradient-primary);
+      color: white;
+    }
+    
+    .logout-btn {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border-medium);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+    }
+    
+    .login-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: 16px;
+      padding: 25px 20px;
+      box-shadow: var(--shadow-lg);
+      width: 100%;
+      max-width: 320px;
+      position: relative;
+    }
+    
+    .login-container::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: var(--gradient-primary);
+      border-radius: 16px 16px 0 0;
+    }
+    
+    h1 {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 8px;
+    }
+    
+    .subtitle {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 25px;
+      font-weight: 500;
+    }
+    
+    .form-group {
+      margin-bottom: 18px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    
+    input {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--bg-tertiary);
+      border: 1.5px solid var(--border-light);
+      border-radius: 10px;
+      color: var(--text-primary);
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: var(--bg-secondary);
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+    }
+    
+    button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      width: 100%;
+      margin: 8px 0;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .btn-login {
+      background: var(--gradient-primary);
+      color: white;
+      box-shadow: var(--shadow-md);
+    }
+    
+    .error {
+      color: var(--danger);
+      margin-top: 10px;
+      padding: 8px;
+      border-radius: 6px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      display: none;
+      font-size: 0.75rem;
+    }
+    
+    /* Main Page Container */
+    .main-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    /* Tool Cards Container */
+    .tools-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      width: 100%;
+      margin-bottom: 30px;
+    }
+    
+    /* Tool Card Styles */
+    .tool-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: var(--shadow-md);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      min-height: 200px;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .tool-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      border-radius: 16px 16px 0 0;
+    }
+    
+    .tool-card:nth-child(1)::before { background: var(--gradient-primary); }
+    .tool-card:nth-child(2)::before { background: var(--gradient-secondary); }
+    .tool-card:nth-child(3)::before { background: var(--gradient-accent); }
+    .tool-card:nth-child(4)::before { background: var(--gradient-success); }
+    
+    .tool-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+    
+    .tool-card:nth-child(1) .tool-icon { color: var(--primary); }
+    .tool-card:nth-child(2) .tool-icon { color: var(--secondary); }
+    .tool-card:nth-child(3) .tool-icon { color: var(--accent); }
+    .tool-card:nth-child(4) .tool-icon { color: var(--success); }
+    
+    .tool-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    
+    .tool-card:nth-child(1) .tool-title {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .tool-card:nth-child(2) .tool-title {
+      background: var(--gradient-secondary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .tool-card:nth-child(3) .tool-title {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .tool-card:nth-child(4) .tool-title {
+      background: var(--gradient-success);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .tool-description {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 15px;
+    }
+    
+    .tool-button {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      width: auto;
+      margin: 0;
+    }
+    
+    .tool-card:nth-child(1) .tool-button { background: var(--gradient-primary); color: white; }
+    .tool-card:nth-child(2) .tool-button { background: var(--gradient-secondary); color: white; }
+    .tool-card:nth-child(3) .tool-button { background: var(--gradient-accent); color: white; }
+    .tool-card:nth-child(4) .tool-button { background: var(--gradient-success); color: white; }
+    
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+    }
+    
+    .modal-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: var(--shadow-lg);
+      width: 90%;
+      max-width: 900px;
+      max-height: 90vh;
+      margin: 5vh auto;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    
+    .modal-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+    
+    .modal-close {
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-secondary);
+      width: auto;
+      margin: 0;
+      padding: 0;
+      height: auto;
+    }
+    
+    .modal-close:hover {
+      color: var(--danger);
+    }
+    
+    .modal-body {
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+    
+    .side-by-side-container {
+      display: flex;
+      gap: 15px;
+      height: 350px;
+    }
+
+    .input-panel {
+      flex: 0 0 220px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .result-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    textarea {
+      width: 100%;
+      height: 100%;
+      background: var(--bg-tertiary);
+      border: 1.5px solid var(--border-light);
+      border-radius: 10px;
+      padding: 12px;
+      color: var(--text-primary);
+      font-size: 12px;
+      resize: none;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: var(--bg-secondary);
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+    }
+    
+    .result {
+      margin-top: 0;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-medium);
+      border-radius: 10px;
+      padding: 14px;
+      flex-grow: 1;
+      overflow-y: auto;
+      display: none;
+    }
+    
+    .result::-webkit-scrollbar { width: 6px; }
+    .result::-webkit-scrollbar-track { background: var(--bg-tertiary); border-radius: 3px; }
+    .result::-webkit-scrollbar-thumb { background: var(--border-dark); border-radius: 3px; }
+    .result::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+    
+    .result a {
+      color: var(--primary);
+      word-break: break-all;
+      display: block;
+      margin: 6px 0;
+      padding: 6px 8px;
+      border-radius: 6px;
+      font-size: 0.65rem;
+      text-decoration: none;
+    }
+    
+    .result a:hover {
+      background: var(--bg-tertiary);
+      color: var(--primary-dark);
+      padding-left: 12px;
+    }
+    
+    /* Style for the large number input */
+    .large-number-input {
+      padding: 15px 14px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-align: center;
+    }
+    
+    /* Style for select dropdown */
+    select {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--bg-tertiary);
+      border: 1.5px solid var(--border-light);
+      border-radius: 10px;
+      color: var(--text-primary);
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+    }
+    
+    select:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: var(--bg-secondary);
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+    }
+    
+    /* Style for offer selection container */
+    .offer-selection {
+      background: var(--bg-tertiary);
+      border: 1.5px solid var(--border-light);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+    
+    .offer-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      display: block;
+    }
+    
+    .offer-info {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+    
+    /* Style for random offer selection */
+    .random-offer-container {
+      background: var(--bg-tertiary);
+      border: 1.5px solid var(--border-light);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+    
+    .random-offer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    
+    .random-offer-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+    }
+    
+    .random-offer-icon {
+      margin-right: 8px;
+      font-size: 1rem;
+    }
+    
+    .random-offer-toggle {
+      width: 44px;
+      height: 24px;
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .random-offer-toggle.active {
+      background: var(--gradient-accent);
+    }
+    
+    .random-offer-toggle::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+    }
+    
+    .random-offer-toggle.active::after {
+      left: 22px;
+    }
+    
+    .offer-checkboxes {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 10px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s;
+    }
+    
+    .offer-checkboxes.show {
+      max-height: 200px;
+    }
+    
+    .offer-checkbox-item {
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      background: var(--bg-secondary);
+      border-radius: 8px;
+    }
+    
+    .offer-checkbox-item input[type="checkbox"] {
+      width: auto;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    
+    .offer-checkbox-label {
+      font-size: 0.75rem;
+      color: var(--text-primary);
+      cursor: pointer;
+      flex: 1;
+    }
+    
+    /* Stats for random offers */
+    .offer-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 0.7rem;
+      color: var(--text-tertiary);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    
+    .offer-stat {
+      text-align: center;
+      flex: 1;
+      min-width: 50px;
+    }
+    
+    .offer-stat-value {
+      font-weight: 700;
+      color: var(--text-secondary);
+    }
+    
+    /* Styles for Generator Kata & Username */
+    .tab-navigation {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--border-light);
+    }
+
+    .tab-button {
+      flex: 1;
+      padding: 12px;
+      background: none;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .tab-button.active {
+      color: var(--primary);
+    }
+
+    .tab-button.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--primary);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .country-selector, .quantity-selector, .names-input-selector, .username-input-selector {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .country-selector label, .quantity-selector label, .names-input-selector label, .username-input-selector label {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .country-selector select, .quantity-selector input, .names-input-selector textarea, .username-input-selector textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid var(--border-light);
+      border-radius: 10px;
+      background-color: var(--bg-tertiary);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      color: var(--text-primary);
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .names-input-selector textarea, .username-input-selector textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .country-selector select:focus, .quantity-selector input:focus, .names-input-selector textarea:focus, .username-input-selector textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .sentence-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 15px;
+      margin: 20px 0;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .sentence-container.visible {
+      opacity: 1;
+    }
+
+    #sentence-display {
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      text-align: left;
+      background-color: var(--bg-secondary);
+      padding: 20px;
+      border-radius: 12px;
+      border-left: 5px solid var(--primary);
+      flex-grow: 1;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    
+    #usernames-result, #extracted-names-result {
+      width: 100%;
+      min-height: 200px;
+      padding: 15px;
+      border: 2px solid var(--border-light);
+      border-radius: 10px;
+      background-color: var(--bg-secondary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      resize: vertical;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      margin: 20px 0;
+      box-sizing: border-box;
+    }
+
+    #usernames-result.visible, #extracted-names-result.visible {
+      opacity: 1;
+    }
+
+    .copy-btn {
+      background-color: var(--bg-tertiary);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.2s ease-in-out;
+      flex-shrink: 0;
+    }
+
+    .copy-btn:hover {
+      background-color: var(--text-secondary);
+    }
+    
+    .copy-btn.copied {
+      background-color: var(--success);
+    }
+
+    .copy-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--text-secondary);
+      transition: fill 0.2s ease-in-out;
+    }
+
+    .copy-btn.copied svg {
+      fill: #ffffff;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .generate-btn, .refresh-btn, .copy-all-btn, .extract-btn {
+      color: white;
+      border: none;
+      padding: 15px 35px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .generate-btn {
+      background-color: var(--primary);
+    }
+
+    .generate-btn:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .refresh-btn {
+      background-color: var(--text-secondary);
+    }
+
+    .refresh-btn:hover {
+      background-color: var(--text-tertiary);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .copy-all-btn {
+      background-color: var(--success);
+    }
+
+    .copy-all-btn:hover {
+      background-color: #0ea5e9;
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .extract-btn {
+      background-color: var(--accent);
+    }
+
+    .extract-btn:hover {
+      background-color: #db2777;
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .generate-btn:active, .refresh-btn:active, .copy-all-btn:active, .extract-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .refresh-btn svg, .copy-all-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
+    }
+
+    .mode-selector {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .mode-option {
+      flex: 1;
+      padding: 10px;
+      background-color: var(--bg-tertiary);
+      border: 2px solid var(--border-light);
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+
+    .mode-option.active {
+      border-color: var(--primary);
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: var(--text-tertiary);
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .tools-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+      
+      .login-container {
+        max-width: 100%;
+        margin: 0 10px;
+      }
+      
+      h1 {
+        font-size: 1.5rem;
+      }
+      
+      .header-controls {
+        top: 10px;
+        right: 10px;
+      }
+      
+      .side-by-side-container {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .input-panel {
+        flex: 1;
+        width: 100%;
+      }
+      
+      .result-panel {
+        min-height: 250px;
+      }
+      
+      .modal-content {
+        width: 95%;
+        margin: 2.5vh auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Controls -->
+  <div class="header-controls">
+    <button class="logout-btn" onclick="logout()" style="display: none;" id="logoutBtn">LOGOUT</button>
+    <div class="theme-toggle">
+      <button class="theme-toggle-btn" id="lightBtn" onclick="setTheme('light')">☀️</button>
+      <button class="theme-toggle-btn" id="darkBtn" onclick="setTheme('dark')">🌙</button>
+    </div>
+  </div>
+
+  <!-- LOGIN PAGE -->
+  <div id="loginPage" class="login-container">
+    <h1>Instalive Tools</h1>
+    <p class="subtitle">Professional Link Management Suite</p>
+    
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Masukkan username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Masukkan password" required>
+      </div>
+      <button type="submit" class="btn-login">LOGIN</button>
+      <div id="loginError" class="error">Username atau password salah!</div>
+    </form>
+  </div>
+
+  <!-- MAIN APP PAGE -->
+  <div id="mainPage" style="display: none; width: 100%;">
+    <div class="main-container">
+      <h1 style="text-align: center; margin-bottom: 10px;">Instalive Tools</h1>
+      <p class="subtitle" style="margin-bottom: 30px;">Generate random links • Facebook l.php bypass • l.wl.co raw debug (no encode)</p>
+
+      <div class="tools-container">
+        <!-- CARD 1: RANDOM -->
+        <div class="tool-card" onclick="openModal('randomModal')">
+          <div class="tool-icon">🔗</div>
+          <h3 class="tool-title">Generate Random Links</h3>
+          <p class="tool-description">Buat link acak dengan cepat dan mudah</p>
+          <button class="tool-button">BUKA</button>
+        </div>
+
+        <!-- CARD 2: FACEBOOK -->
+        <div class="tool-card" onclick="openModal('fbModal')">
+          <div class="tool-icon">📘</div>
+          <h3 class="tool-title">Facebook l.php Bypass</h3>
+          <p class="tool-description">Konversi link ke format Facebook l.php</p>
+          <button class="tool-button">BUKA</button>
+        </div>
+
+        <!-- CARD 3: l.wl.co RAW -->
+        <div class="tool-card" onclick="openModal('wlModal')">
+          <div class="tool-icon">🔧</div>
+          <h3 class="tool-title">l.wl.co Raw Debug</h3>
+          <p class="tool-description">Konversi link ke format l.wl.co tanpa encode</p>
+          <button class="tool-button">BUKA</button>
+        </div>
+        
+        <!-- CARD 4: Generator Kata & Username -->
+        <div class="tool-card" onclick="openModal('generatorModal')">
+          <div class="tool-icon">✍️</div>
+          <h3 class="tool-title">Generator Kata & Username</h3>
+          <p class="tool-description">Generate kata-kata dan username acak</p>
+          <button class="tool-button">BUKA</button>
+        </div>
+      </div>
+
+      <footer></footer>
+    </div>
+  </div>
+
+  <!-- Modal for Random Links -->
+  <div id="randomModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" style="background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent;">Generate Random Links</h2>
+        <button class="modal-close" onclick="closeModal('randomModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="side-by-side-container">
+          <div class="input-panel">
+            <!-- Random Offer Toggle -->
+            <div class="random-offer-container">
+              <div class="random-offer-header">
+                <div class="random-offer-title">
+                  <span class="random-offer-icon">🎲</span>
+                  <span>Random Offer</span>
+                </div>
+                <div class="random-offer-toggle" id="randomOfferSwitch" onclick="toggleRandomOffer()"></div>
+              </div>
+              
+              <!-- Offer Checkboxes -->
+              <div class="offer-checkboxes" id="offerCheckboxes">
+                <div class="offer-checkbox-item">
+                  <input type="checkbox" id="offer1" checked>
+                  <label for="offer1" class="offer-checkbox-label">Offer 1 - IMO</label>
+                </div>
+                <div class="offer-checkbox-item">
+                  <input type="checkbox" id="offer2" checked>
+                  <label for="offer2" class="offer-checkbox-label">Offer 2 - TRAFEE</label>
+                </div>
+                <div class="offer-checkbox-item">
+                  <input type="checkbox" id="offer3" checked>
+                  <label for="offer3" class="offer-checkbox-label">Offer 3 - LP</label>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Offer Selection -->
+            <div class="offer-selection" id="offerSelection">
+              <label class="offer-label">Pilih Offer:</label>
+              <select id="offerSelect">
+                <option value="https://kramat11.github.io/landing-kahf-1766161652367/">Offer 1 - IMO </option>
+                <option value="https://kramat11.github.io/KAHF">Offer 2 - TRAFEE </option>
+                <option value="https://kramat11.github.io/coba3">Offer 3 - LP </option>
+              </select>
+              <div class="offer-info"></div>
+            </div>
+            
+            <!-- Offer Stats (shown when random is enabled) -->
+            <div class="offer-stats" id="offerStats" style="display: none;">
+              <div class="offer-stat" id="imoStat">
+                <div class="offer-stat-value" id="imoCount">0</div>
+                <div>IMO</div>
+              </div>
+              <div class="offer-stat" id="trafeeStat">
+                <div class="offer-stat-value" id="trafeeCount">0</div>
+                <div>TRAFEE</div>
+              </div>
+              <div class="offer-stat" id="lpStat">
+                <div class="offer-stat-value" id="lpCount">0</div>
+                <div>LP</div>
+              </div>
+            </div>
+            
+            <!-- Input for number of links, now larger and on its own line -->
+            <input type="number" id="linkCount" min="1" max="1000" value="100" placeholder="Jumlah link" class="large-number-input">
+            
+            <!-- Generate button -->
+            <button class="btn-generate" onclick="generateRandom()">GENERATE</button>
+            
+            <!-- Copy button -->
+            <button class="btn-copy" onclick="copyRandom()" id="copyRandomBtn" style="display: none;">COPY SEMUA LINK</button>
+          </div>
+          <div class="result-panel">
+            <div class="result" id="randomResult">
+              <div id="randomOutput"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Facebook -->
+  <div id="fbModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" style="background: var(--gradient-secondary); -webkit-background-clip: text; background-clip: text; color: transparent;">Facebook l.php Bypass</h2>
+        <button class="modal-close" onclick="closeModal('fbModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="side-by-side-container">
+          <div class="input-panel">
+            <textarea id="inputLinks" placeholder="Tempel link Instalive di sini..."></textarea>
+            <button class="btn-convert" onclick="convertToFB()">CONVERT KE FACEBOOK</button>
+            <button class="btn-copy" onclick="copyFB()" id="copyFbBtn" style="display: none;">COPY SEMUA FB LINK</button>
+          </div>
+          <div class="result-panel">
+            <div class="result" id="fbResult">
+              <div id="fbOutput"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for l.wl.co Raw -->
+  <div id="wlModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" style="background: var(--gradient-accent); -webkit-background-clip: text; background-clip: text; color: transparent;">l.wl.co Raw Debug</h2>
+        <button class="modal-close" onclick="closeModal('wlModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="side-by-side-container">
+          <div class="input-panel">
+            <textarea id="inputWl" placeholder="Tempel link yang sama, hasilnya tanpa %3A %2F"></textarea>
+            <button class="btn-wl" onclick="convertToWlRaw()">CONVERT KE l.wl.co (RAW)</button>
+            <button class="btn-copy" onclick="copyWlRaw()" id="copyWlBtn" style="display: none;">COPY SEMUA l.wl.co</button>
+          </div>
+          <div class="result-panel">
+            <div class="result" id="wlResult">
+              <div id="wlOutput"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Generator Kata & Username -->
+  <div id="generatorModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" style="background: var(--gradient-success); -webkit-background-clip: text; background-clip: text; color: transparent;">Generator Kata & Username</h2>
+        <button class="modal-close" onclick="closeModal('generatorModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+          <button class="tab-button active" data-tab="sentence">kata-kata</button>
+          <button class="tab-button" data-tab="username">Username</button>
+        </div>
+        
+        <!-- Tab Content for Sentence Generator -->
+        <div id="sentence-tab" class="tab-content active">
+          <div class="country-selector">
+            <label for="country-select">Negara:</label>
+            <select id="country-select">
+              <option value="america">America</option>
+              <option value="germany">Germany</option>
+              <option value="france">France</option>
+              <option value="brazil">Brazil</option>
+            </select>
+          </div>
+          
+          <div id="sentence-container" class="sentence-container">
+            <div id="sentence-display" class="sentence-display">
+              <!-- Kalimat acak akan muncul di sini -->
+            </div>
+            <button id="copy-btn" class="copy-btn" title="Salin ke clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="button-group">
+            <button id="generate-btn" class="generate-btn">Generate kata2</button>
+            <button id="refresh-sentence-btn" class="refresh-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+              </svg>
+              Refresh
+            </button>
+          </div>
+        </div>
+        
+        <!-- Tab Content for Username Generator -->
+        <div id="username-tab" class="tab-content">
+          <!-- Mode Selector -->
+          <div class="mode-selector">
+            <div class="mode-option active" data-mode="random">Generate Acak</div>
+            <div class="mode-option" data-mode="custom">nama lengkap</div>
+            <div class="mode-option" data-mode="extract">Ekstrak dari Username</div>
+          </div>
+          
+          <!-- Random Mode Content -->
+          <div id="random-mode-content" class="mode-content">
+            <div class="quantity-selector">
+              <label for="quantity-input">Jumlah Username:</label>
+              <input type="number" id="quantity-input" min="1" max="100" value="" placeholder="Masukkan jumlah...">
+            </div>
+          </div>
+          
+          <!-- Custom Mode Content -->
+          <div id="custom-mode-content" class="mode-content" style="display: none;">
+            <div class="names-input-selector">
+              <label for="names-input">Masukkan Nama (satu per baris):</label>
+              <textarea id="names-input" placeholder="John Doe&#10;Jane Smith&#10;Ahmad Abdullah"></textarea>
+            </div>
+          </div>
+          
+          <!-- Extract Mode Content -->
+          <div id="extract-mode-content" class="mode-content" style="display: none;">
+            <div class="username-input-selector">
+              <label for="usernames-input">Masukkan Username (satu per baris):</label>
+              <textarea id="usernames-input" placeholder="dixie_garfield19&#10;priscilla_pinehurst32&#10;cadence_renfield13&#10;renee_dudley85&#10;crystal_thacker55"></textarea>
+            </div>
+          </div>
+          
+          <!-- Result textarea for both generate and extract -->
+          <textarea id="usernames-result" readonly placeholder="Hasil akan muncul di sini..."></textarea>
+
+          <div class="button-group">
+            <button id="generate-usernames-btn" class="generate-btn">Generate Username</button>
+            <button id="extract-names-btn" class="extract-btn" style="display: none;">Ekstrak Nama</button>
+            <button id="copy-all-btn" class="copy-all-btn">Salin Semua</button>
+            <button id="refresh-username-btn" class="refresh-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+              </svg>
+              Refresh
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- DAFTAR KALIMAT BERDASARKAN NEGARA ---
+    const sentencesByCountry = {
+      america: [
+        "Hi old man\nMy name is Harriet\nI've been waiting for your answer since yesterday\nWhat's your name and where are you from?",
+        "My name is Michelle . I'm from the USA 🇺🇸.\nI'm single, 63, and have been battling alcohol addiction for 8 years.\nToday marks 600 days of sobriety. ❤️🩹💔",
+        "Sir… my name is Elsa\nI'm from USA. I politely asked you before, \"Where are you from?\" Please tell me. This is my last chance",
+        "My name is Justice. I'm 52 and grateful.\nIs my age a problem? I was born in 1973.",
+        "My name is Abbie. I'm 67 today 🎂☺️ happy birthday to me I guess 🤗\nWhere are you? I'll drive to you, I'm serious!Where you from?",
+        "Hello\nMy name is Gwen\nI am 39\nI wonder how far away we are Can you tell me where you are from?",
+        "Hey, old man!!\nWhy are you here again?\nYou still haven't told me where you live?\nCan you tell me where you live? Please answer!\nMy name is Camila !!",
+        "Hey, grandpa!! Why are you here once more? You still owe me your location? Can you share where you live? Please! I'm Sadie !!",
+        "Hey, old man!\nMy name is Carley.\nReady for Christmas 🎄❤️",
+        "𝗛𝗶𝗶\n🟢\n𝗛𝗲𝗹𝗹𝗼..\n💬",
+        "Hi, old man.\nMy name is Morgaine.\nI'm from California.\nWhere are you from?"
+      ],
+      germany: [
+        "l'm from Germany 🇩🇪 and you? 📍",
+        "Hi, I'm 32 || From Germany 🇩🇪 📍",
+        "riaß eich☺️🫶🏻\nDeutschland 🇩🇪",
+        "Woher kommt ihr ?\nIch aus Sachsen 🙏🏼",
+        "gefall ich dir?",
+        "𝗛𝗶𝗶\n🟢\n𝗛𝗲𝗹𝗹𝗼..\n💬",
+        "Ich komme aus Deutschland 🇩🇪 und du? 📍"
+      ],
+      france: [
+        "Mon CV 🌺\nNom : Peggy \nÂge : 37 ans\nTaille : 1m78\nPays : France 🇫🇷\nOrigine : Marseille, France 🇫🇷",
+        "Mon CV 🌺\nNom : Sylvie Dubiel\nÂge : 67 ans\nTaille : 1m73\nPays : France 🇫🇷\nOrigine : Allemand 🇩🇪"
+      ],
+      brazil: [
+        "Minha essência não pede permissão.\nGostei 🤷🏻‍♀️☘️50tona",
+        "Minha essência não pede opinião.❤️🔥"
+      ]
+    };
+
+    // Database nama untuk ekstraksi
+    const firstNames = [
+      "Ariana","Amelia","Aurora","Ava","Abigail","Alice","Allison","Aria","Anna","Annabelle","Amber","Andrea","Ashley","Bianca","Bella","Brooklyn","Blair","Chloe","Clara","Charlotte","Adriana","Adele","Adeline","Alexis","Alexa","Alicia","Alina","Alison","Amara","Amaya","Angelina","Anita","April","Ariella","Astrid","Beatrice","Bethany","Blakeley","Brenda","Bridget","Brianna","Brielle","Cadence","Carmen","Caroline","Cecilia","Celeste","Charlie","Chelsea","Christina","Cora","Courtney","Crystal","Cynthia","Dakota","Delilah","Denise","Destiny","Dominique","Eden","Edith","Eleanor","Elise","Eliza","Elizabeth","Ella","Ellen","Elsie","Esme","Estelle","Esther","Etta","Faith","Farrah","Frances","Gloria","Gwen","Hadley","Harmony","Hayden","Heidi","Helen","Holly","Hope","Indie","Ingrid","Irene","Isabelle","Isla","Ivanna","Janet","Janelle","Janice","Jenna","Jessie","Jillian","Joanna","Jordan","Joyce","Judith","Kara","Karen","Karina","Katrina","Kendall","Kenzie","Kimberly","Kristen","Lana","Leighton","Lena","Leslie","Lexi","Liliana","Lindsay","Lola","Lucia","Lucy","Lydia","Lynette","Mabel","Maeve","Magnolia","Maisie","Margaret","Maria","Marina","Marissa","Marley","Matilda","Meghan","Melanie","Melissa","Meredith","Michelle","Miranda","Morgan","Nadia","Nora","Oakley","Odette","Paige","Palmer","Patricia","Paula","Pearl","Penny","Priscilla","Reagan","Reina","Rhea","Rhianna","Rosalie","Rowan","Sadie","Samantha","Samara","Sandra","Sara","Serena","Shannon","Shelby","Skye","Skylar","Simone","Sofia","Talia","Teresa","Tessa","Tiffany","Trinity","Tyra","Valentina","Veronica","Vivian","Wendy","Whitney","Willa","Xenia","Yasmin","Yvonne","Zoey","Zelda","Alma","Angel","Annelise","Antonia","Arden","Arielle","Aviana","Bellamy","Bettina","Bliss","Brittany","Bronte","Callie","Carlie","Carissa","Cecily","Charlene","Clarissa","Colette","Corrine","Dahlia","Dana","Debby","Desiree","Devon","Dixie","Dora","Eileen","Eliana","Elowen","Ember","Emery","Emmeline","Erika","Erin","Evangeline","Everly","Fallon","Farley","Flora","Frida","Geneva","Georgina","Gianna","Greta","Gwyneth","Hadassa","Harlow","Helena","Indira","Ivory","Jada","Jamie","Jayla","Jemma","Jolie","Juniper","Kailyn","Kalea","Kallie","Kelsey","Kenna","Kenzie","Kinsley","Larissa","Leilani","Lexie","Lilliana","Lindy","Lorelei","Louisa","Lucinda","Lyra","Macy","Madeline","Mae","Marigold","Marina","Marisol","Melody","Mena","Miriam","Monica","Myra","Nadia","Nathalie","Nevaeh","Nola","Noelle","Oaklyn","Opal","Parker","Perla","Presley","Renata","Renee","Reverie","Riley","Rory","Rosie","Sable","Salma","Sasha","Selena","Serenity","Shay","Shelly","Sierra","Simona","Sonya","Stevie","Tabitha","Tara","Thea","Theresa","Tori","Uma","Vada","Valencia","Vera","Verity","Vienna","Vina","Violetta","Waverly","Zadie","Zaira","Zarina","Zinnia","Zola","Zuri","Ainsley","Amiya","Arietta","Becca","Blaire","Breanna","Callista","Camilla","Capri","Carina","Catalina","Celina","Charmaine","Cleo","Coraline","Cressida","Danica","Delaney","Demi","Elara","Ellery","Emersyn","Emilia","Estella","Felicity","Giovanna","Hadriel","Hana","Holland","Ilana","Ilaria","Jamila","Jazmine","Joelle","Kalani","Kamila","Karlee","Keira","Kiana","Kristina","Lacey","Leia","Liberty","Livia","Loretta","Luella","Madelyn","Marcelline","Marion","Marleigh","Mavis","Mckinley","Mira","Mirella","Myla","Nalani","Nellie","Neriah","Nicolette","Nori","Oriana","Paloma","Phoenyx","Promise","Rayna","Rivka","Sabina","Saffron","Sarai","Sylvie","Tegan","Tenley","Thalia","Tinley","Vanora","Vesper","Vida","Winsley","Ximena","Yara","Yesenia","Zahara","Zarina","Zaylee","Zetta","Zofia"
+    ];
+    
+    const lastNames = [
+      "Anderson","Armstrong","Bailey","Baker","Baldwin","Barnes","Bennett","Bishop","Blackwood","Blake","Bolton","Bradford","Bridges","Brooks","Brown","Campbell","Carter","Chandler","Clarke","Clayton","Cole","Collins","Cooper","Cox","Crawford","Daniels","Dawson","Davis","Dixon","Donovan","Douglas","Doyle","Edwards","Ellis","Emerson","Fisher","Fleming","Foster","Fox","Franklin","Ackerman","Adams","Adderley","Albright","Alden","Aldridge","Allerton","Ashford","Ashton","Atwood","Barclay","Barrett","Beaumont","Beckett","Bellamy","Benton","Berkeley","Bingham","Bishopson","Blackburn","Blackwell","Bloomfield","Bloomberg","Brixton","Brinton","Brockman","Bromley","Buckley","Burton","Byrne","Caldwell","Callahan","Calloway","Carlisle","Carmichael","Carrington","Carver","Chamberlain","Channing","Chapman","Charleston","Chesterton","Claymore","Clifford","Clifton","Cleveland","Clemens","Crockett","Crossley","Cumberland","Dalton","Davenport","Delaney","Dennison","Derbyshire","Devonshire","Donnelly","Draper","Drayton","Dunbar","Easton","Eaton","Ellington","Ellsworth","Elridge","Embry","Emberton","Fairchild","Fairfax","Falkner","Farrington","Fenton","Ferris","Finnegan","Fitzgerald","Fitzpatrick","Fleetwood","Fleming","Forbes","Foreman","Fosterly","Garrison","Gatlin","Gillespie","Gladstone","Godfrey","Goldberg","Goodwin","Granger","Greenfield","Greystone","Grimsley","Harrington","Hathaway","Hayward","Hemingway","Hollister","Holloway","Hollingsworth","Huxley","Ingram","Irving","Jefferson","Jennison","Jericho","Kensington","Kerrigan","Kingsley","Kirkland","Kingsford","Lancaster","Landry","Langston","Larrimore","Lennox","Leroy","Linden","Lockwood","Longley","Lovelace","Madison","Marlow","Marsden","Merrick","Merritt","Middleton","Montgomery","Montague","Moreland","Mulberry","Northwood","Norwood","Oakley","Orwell","Osborne","Oxford","Paddock","Paxton","Pendleton","Pennington","Pemberton","Prescott","Princeton","Pritchard","Quinlan","Radcliffe","Rafferty","Ramone","Redford","Remington","Renfield","Rockwell","Rosenberg","Rutherford","Salinger","Sanderson","Sanford","Schneider","Sheffield","Sherman","Shepherd","Silverman","Simmons","Sinclair","Somerset","Southwell","Stanford","Sterling","Stratford","Sutherland","Tanner","Tennyson","Thatcher","Thornton","Thurman","Tolliver","Townsend","Trenton","Truman","Underwood","Valentine","VanAllen","VanBuren","VanDermeer","Vanderbilt","Vega","Vernon","Warner","Waldorf","Waverly","Wentworth","Whitaker","Whitman","Wilder","Wilkinson","Winchester","Winslow","Winton","Woodard","Worthington","Wellington","Yorkshire","Yardley","Yarborough","Zimmerman","Ziegler","Whitlock","Adler","Ainsworth","Ashbury","Ashcroft","Astor","Bainbridge","Banner","Bardwell","Barington","Barringer","Beckford","Berrington","Billingham","Birchwood","Blackthorn","Blaisdell","Blakemore","Bloomstein","Bracken","Brayden","Briarwood","Brigham","Brighton","Brimhall","Bristol","Broadmoor","Bromfield","Brookshire","Broughton","Browning","Bryson","Buckingham","Burbank","Calderon","Calhoun","Carlstead","Carling","Carmine","Carrigan","Cavanaugh","Cavendish","Chadwick","Chalmers","Chandley","Channington","Chase","Churchill","Claremont","Clemington","Cobalt","Colborne","Colbridge","Colter","Connelly","Compton","Conway","Corbin","Cornwell","Corwin","Cranford","Crandall","Cranston","Creighton","Cromwell","Crenshaw","Creswell","Cunningham","Dallington","Dalrymple","Damascus","Danbury","Darrow","Deacon","Denham","Derringer","Devlin","Dickerson","Dillinger","Dimaggio","Donahue","Drummond","Dudley","Duncan","Dunham","Eastgate","Eastland","Eastwick","Eddington","Eddison","Ellsworth","Elmwood","Emsworth","Endicott","Everton","Fairbanks","Fairborne","Fairleigh","Falwell","Farnsworth","Fenwick","Fernwood","Ferrington","Fielding","Finch","Finsbury","Fitzroy","Fleet","Fletcher","Flint","Florence","Folsom","Fontaine","Forsythe","Fosterfield","Foxworth","François","Frampton","Galen","Galloway","Garfield","Garrisonson","Gatsby","Gentry","Gilmore","Gladwin","Goddard","Goldwin","Grafton","Grantham","Graysen","Greyson","Grimsdale","Gulliver","Hadley","Hargreaves","Harriman","Hartford","Hartwick","Hastings","Hawthorne","Haymer","Hennessy","Hensley","Hightower","Hillsborough","Hollander","Hollins","Holcroft","Hollman","Hollowell","Holland","Huxford","Hyde","Jasper","Jenkins","Jolley","Kendale","Kendrick","Kenswell","Kensmore","Kingsbridge","Kingsmore","Kingsbury","Kingston","Kipling","Kirkpatrick","Knox","Lancasterson","Langmore","Langley","Langridge","Lathan","Laurent","Laughton","Leighton","Lemont","Lennard","Lindenwood","Linton","Lockridge","Longford","Lynwood","MacAllister","MacArthur","MacGregor","MacKenzie","MacLaren","Maddox","Madrid","Maguire","Manchester","Mansfield","Marbury","Marchand","Mariner","Markham","Marlowe","Marshell","Martell","Maynard","Mercer","Meredith","Merton","Middleson","Milburn","Millerton","Millhouse","Milligan","Millwood","Milton","Montrose","Morley","Mortimer","Morrigan","Mulford","Neville","Newberry","Newfield","Newgate","Newkirk","Nightingale","Nixon","Northwoodson","Norwell","Oakridge","Oberlin","O'Rourke","Olsen","Onslow","Orion","Ormsby","Oswald","Overton","Parkinson","Parsley","Paterson","Pendragon","Penn","Perkins","Perrington","Peterson","Pickering","Pike","Pinehurst","Pratt","Presley","Princetonson","Prior","Radley","Redmond","Reeves","Reinhart","Renshaw","Reynard","Ridgeway","Riggs","Rivers","Rivington","Rockford","Rockridge","Rogers","Romilly","Rowland","Rowley","Rutherfordson","Sandford","Samuels","Saxby","Schaefer","Schultz","Sedgwick","Selwyn","Seymour","Shannon","Sharpe","Shipman","Silverwood","Sinclairson","Slater","Smalls","Somerville","Southgate","Stark","Stanton","St. Claire","Steadman","Steadwell","Stillwater","Stone","Stonebridge","Storm","Stout","Strickland","Sutherlandson","Talisman","Tannerly","Templeton","Tennysonson","Thacker","Thorn","Thorntonson","Thornefield","Tidwell","Tilbury","Tollinson","Tollman","Torres","Townley","Travilian","Trevor","Trueman","Tucker","Underhill","Underly","Upton","Valletta","Vallaire","Valmont","Vance","Vanderlyn","VanHolt","VanKeller","Vaughn","Velasquez","Veridian","Vickers","Vincent","Voss","Wainwright","Wakefield","Walden","Wallingford","Warfield","Warley","Warrington","Waterford","Weatherby","Weldon","Wesley","Westbrook","Westfall","Whitmore","Whitstone","Wickham","Wilberton","Wilde","Winfield","Winspear","Wintonson","Wolfe","Woodrow","Wortham","Wycliffe","Wynter","Yarrow","Yeager","York","Youngblood","Zander","Zimmer"
+    ];
+
+    // Function to generate random full name
+    function randomFullName() {
+      const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+      const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+      
+      return {
+        fullName: `${firstName} ${lastName}`,
+        firstName: firstName,
+        lastName: lastName
+      };
+    }
+
+    // Function to generate username from first and last name
+    function generateUsername(firstName, lastName) {
+      const baseUsername = `${firstName.toLowerCase()}_${lastName.toLowerCase()}`;
+      const randomDigits = Math.floor(Math.random() * 90) + 10; // Generates a number from 10 to 99
+      return baseUsername + randomDigits;
+    }
+
+    // Function to extract name from username
+    function extractNameFromUsername(username) {
+      // Remove numbers and special characters, keep letters only
+      const cleanedUsername = username.toLowerCase().replace(/[^a-z]/g, '');
+      
+      // Try to split by common separators if they exist
+      let parts = [];
+      if (username.includes('_')) {
+        parts = username.toLowerCase().split('_');
+      } else if (username.includes('.')) {
+        parts = username.toLowerCase().split('.');
+      } else if (username.includes('-')) {
+        parts = username.toLowerCase().split('-');
+      } else {
+        // If no separators, try to split by numbers
+        parts = username.toLowerCase().split(/\d+/);
+      }
+      
+      // Clean each part (remove numbers)
+      parts = parts.map(part => part.replace(/\d+/g, ''));
+      
+      // If we still have only one part, try to split it based on common name boundaries
+      if (parts.length === 1 && parts[0].length > 3) {
+        const singlePart = parts[0];
+        let foundFirstName = null;
+        let foundLastName = null;
+        
+        // Try to find a first name at the beginning
+        for (let i = 3; i <= singlePart.length; i++) {
+          const potentialFirstName = singlePart.substring(0, i);
+          if (firstNames.includes(capitalizeFirstLetter(potentialFirstName))) {
+            foundFirstName = capitalizeFirstLetter(potentialFirstName);
+            const remainingPart = singlePart.substring(i);
+            
+            // Try to find a last name in the remaining part
+            for (let j = 3; j <= remainingPart.length; j++) {
+              const potentialLastName = remainingPart.substring(0, j);
+              if (lastNames.includes(capitalizeFirstLetter(potentialLastName))) {
+                foundLastName = capitalizeFirstLetter(potentialLastName);
+                break;
+              }
+            }
+            
+            // If we found a first name but no last name, use the rest as last name
+            if (foundFirstName && !foundLastName && remainingPart.length > 0) {
+              foundLastName = capitalizeFirstLetter(remainingPart);
+            }
+            
+            break;
+          }
+        }
+        
+        if (foundFirstName) {
+          return {
+            firstName: foundFirstName,
+            lastName: foundLastName || '',
+            fullName: foundLastName ? `${foundFirstName} ${foundLastName}` : foundFirstName,
+            confidence: foundLastName ? 'high' : 'medium'
+          };
+        }
+      }
+      
+      // If we have multiple parts, try to identify first and last name
+      if (parts.length >= 2) {
+        let firstName = '';
+        let lastName = '';
+        let confidence = 'medium';
+        
+        // Check first part against first names
+        if (firstNames.includes(capitalizeFirstLetter(parts[0]))) {
+          firstName = capitalizeFirstLetter(parts[0]);
+          
+          // Check second part against last names
+          if (lastNames.includes(capitalizeFirstLetter(parts[1]))) {
+            lastName = capitalizeFirstLetter(parts[1]);
+            confidence = 'high';
+          } else {
+            // Use the second part as last name anyway
+            lastName = capitalizeFirstLetter(parts[1]);
+          }
+        } else {
+          // If no match, just capitalize the parts
+          firstName = capitalizeFirstLetter(parts[0]);
+          lastName = parts.length > 1 ? capitalizeFirstLetter(parts[1]) : '';
+          confidence = 'low';
+        }
+        
+        return {
+          firstName: firstName,
+          lastName: lastName,
+          fullName: lastName ? `${firstName} ${lastName}` : firstName,
+          confidence: confidence
+        };
+      }
+      
+      // If all else fails, try to extract any recognizable name parts
+      const allParts = cleanedUsername.split('');
+      let bestMatch = '';
+      let bestConfidence = 'low';
+      
+      // Try to find any first name in the username
+      for (const name of firstNames) {
+        if (cleanedUsername.includes(name.toLowerCase())) {
+          if (name.length > bestMatch.length) {
+            bestMatch = name;
+            bestConfidence = 'medium';
+          }
+        }
+      }
+      
+      // Try to find any last name in the username
+      for (const name of lastNames) {
+        if (cleanedUsername.includes(name.toLowerCase())) {
+          if (name.length > bestMatch.length) {
+            bestMatch = name;
+            bestConfidence = 'medium';
+          }
+        }
+      }
+      
+      if (bestMatch) {
+        return {
+          firstName: bestMatch,
+          lastName: '',
+          fullName: bestMatch,
+          confidence: bestConfidence
+        };
+      }
+      
+      // If nothing matches, return the cleaned username with proper capitalization
+      return {
+        firstName: capitalizeFirstLetter(cleanedUsername.substring(0, Math.min(6, cleanedUsername.length))),
+        lastName: cleanedUsername.length > 6 ? capitalizeFirstLetter(cleanedUsername.substring(6)) : '',
+        fullName: capitalizeFirstLetter(cleanedUsername),
+        confidence: 'very low'
+      };
+    }
+
+    // Helper function to capitalize first letter
+    function capitalizeFirstLetter(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    // Function to generate random sentence
+    function generateRandomSentence() {
+      const selectedCountry = document.getElementById('country-select').value;
+      const sentences = sentencesByCountry[selectedCountry];
+      
+      if (!sentences || sentences.length === 0) {
+        document.getElementById('sentence-display').textContent = "Tidak ada kalimat untuk negara ini.";
+        document.getElementById('sentence-container').classList.add('visible');
+        return;
+      }
+      
+      const randomIndex = Math.floor(Math.random() * sentences.length);
+      const randomSentence = sentences[randomIndex];
+
+      document.getElementById('sentence-container').classList.remove('visible');
+
+      setTimeout(() => {
+        document.getElementById('sentence-display').textContent = randomSentence;
+        document.getElementById('sentence-container').classList.add('visible');
+      }, 200);
+    }
+
+    // Function to generate multiple usernames
+    function generateUsernames() {
+      const activeMode = document.querySelector('.mode-option.active').getAttribute('data-mode');
+      let allUsernames = '';
+      
+      if (activeMode === 'random') {
+        let quantity = parseInt(document.getElementById('quantity-input').value);
+        if (isNaN(quantity) || quantity < 1) {
+          quantity = 5;
+          document.getElementById('quantity-input').value = 5;
+        }
+
+        for (let i = 0; i < quantity; i++) {
+          const nameData = randomFullName();
+          const username = generateUsername(nameData.firstName, nameData.lastName);
+          allUsernames += username + '\n';
+        }
+      } else if (activeMode === 'custom') {
+        const names = document.getElementById('names-input').value.trim().split('\n');
+        
+        if (names.length === 0 || (names.length === 1 && names[0] === '')) {
+          document.getElementById('usernames-result').value = 'Silakan masukkan setidaknya satu nama.';
+          document.getElementById('usernames-result').style.opacity = '1';
+          return;
+        }
+        
+        for (const name of names) {
+          if (name.trim() === '') continue;
+          
+          // Split name into parts to get first and last name
+          const nameParts = name.trim().split(' ');
+          let firstName = nameParts[0];
+          let lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : '';
+          
+          // If no last name, use a random one
+          if (lastName === '') {
+            const randomName = randomFullName();
+            lastName = randomName.lastName;
+          }
+          
+          const username = generateUsername(firstName, lastName);
+          allUsernames += username + '\n';
+        }
+      }
+      
+      document.getElementById('usernames-result').style.opacity = '0';
+
+      setTimeout(() => {
+        document.getElementById('usernames-result').value = allUsernames.trim();
+        document.getElementById('usernames-result').style.opacity = '1';
+      }, 200);
+    }
+
+    // Function to extract names from usernames
+    function extractNamesFromUsernames() {
+      const usernames = document.getElementById('usernames-input').value.trim().split('\n');
+      let results = '';
+      
+      if (usernames.length === 0 || (usernames.length === 1 && usernames[0] === '')) {
+        document.getElementById('usernames-result').value = 'Silakan masukkan setidaknya satu username.';
+        document.getElementById('usernames-result').style.opacity = '1';
+        return;
+      }
+      
+      for (const username of usernames) {
+        if (username.trim() === '') continue;
+        
+        const extractedName = extractNameFromUsername(username.trim());
+        results += `${extractedName.fullName}\n`;
+      }
+      
+      document.getElementById('usernames-result').style.opacity = '0';
+
+      setTimeout(() => {
+        document.getElementById('usernames-result').value = results.trim();
+        document.getElementById('usernames-result').style.opacity = '1';
+      }, 200);
+    }
+    
+    // Function to refresh sentence tab
+    function refreshSentenceTab() {
+      document.getElementById('sentence-container').classList.remove('visible');
+      document.getElementById('sentence-display').textContent = '';
+      document.getElementById('country-select').selectedIndex = 0;
+    }
+    
+    // Function to refresh username tab
+    function refreshUsernameTab() {
+      document.getElementById('usernames-result').style.opacity = '0';
+      document.getElementById('usernames-result').value = '';
+      document.getElementById('quantity-input').value = 5;
+      document.getElementById('names-input').value = '';
+      document.getElementById('usernames-input').value = '';
+    }
+
+    // Function to copy text to clipboard
+    function copyToClipboard(text, button) {
+      navigator.clipboard.writeText(text).then(() => {
+        button.classList.add('copied');
+        button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>`;
+
+        setTimeout(() => {
+          button.classList.remove('copied');
+          button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>`;
+        }, 2000);
+      }).catch(err => {
+        console.error('Gagal menyalin teks: ', err);
+        showNotification('Gagal menyalin teks. Silakan salin secara manual.');
+      });
+    }
+    
+    // Function to copy all usernames
+    function copyAllUsernames() {
+      copyToClipboard(document.getElementById('usernames-result').value, document.getElementById('copy-all-btn'));
+    }
+
+    // Initialize Generator Kata & Username
+    function initializeGenerator() {
+      // Tab elements
+      const tabButtons = document.querySelectorAll('.tab-button');
+      const tabContents = document.querySelectorAll('.tab-content');
+      
+      // Tab navigation functionality
+      tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          tabContents.forEach(content => content.classList.remove('active'));
+          
+          button.classList.add('active');
+          const tabId = button.getAttribute('data-tab');
+          document.getElementById(`${tabId}-tab`).classList.add('active');
+        });
+      });
+
+      // Mode selector functionality
+      const modeOptions = document.querySelectorAll('.mode-option');
+      modeOptions.forEach(option => {
+        option.addEventListener('click', () => {
+          modeOptions.forEach(opt => opt.classList.remove('active'));
+          option.classList.add('active');
+          
+          const mode = option.getAttribute('data-mode');
+          
+          // Hide all mode content first
+          document.getElementById('random-mode-content').style.display = 'none';
+          document.getElementById('custom-mode-content').style.display = 'none';
+          document.getElementById('extract-mode-content').style.display = 'none';
+          
+          // Hide all buttons first
+          document.getElementById('generate-usernames-btn').style.display = 'none';
+          document.getElementById('extract-names-btn').style.display = 'none';
+          
+          // Show appropriate content and button
+          if (mode === 'random') {
+            document.getElementById('random-mode-content').style.display = 'block';
+            document.getElementById('generate-usernames-btn').style.display = 'flex';
+            document.getElementById('usernames-result').placeholder = 'Hasil username akan muncul di sini...';
+          } else if (mode === 'custom') {
+            document.getElementById('custom-mode-content').style.display = 'block';
+            document.getElementById('generate-usernames-btn').style.display = 'flex';
+            document.getElementById('usernames-result').placeholder = 'Hasil username akan muncul di sini...';
+          } else if (mode === 'extract') {
+            document.getElementById('extract-mode-content').style.display = 'block';
+            document.getElementById('extract-names-btn').style.display = 'flex';
+            document.getElementById('usernames-result').placeholder = 'Hasil ekstraksi nama akan muncul di sini...';
+          }
+        });
+      });
+
+      // Event Listeners
+      document.getElementById('generate-btn').addEventListener('click', generateRandomSentence);
+      document.getElementById('copy-btn').addEventListener('click', () => copyToClipboard(document.getElementById('sentence-display').textContent, document.getElementById('copy-btn')));
+      document.getElementById('country-select').addEventListener('change', generateRandomSentence);
+      document.getElementById('refresh-sentence-btn').addEventListener('click', refreshSentenceTab);
+      
+      document.getElementById('generate-usernames-btn').addEventListener('click', generateUsernames);
+      document.getElementById('extract-names-btn').addEventListener('click', extractNamesFromUsernames);
+      document.getElementById('copy-all-btn').addEventListener('click', copyAllUsernames);
+      document.getElementById('refresh-username-btn').addEventListener('click', refreshUsernameTab);
+      
+      // Initialize with default values
+      generateRandomSentence();
+      generateUsernames();
+    }
+
+    // Modal Functions
+    function openModal(modalId) {
+      document.getElementById(modalId).style.display = 'block';
+      document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+      
+      // Initialize generator modal if opened
+      if (modalId === 'generatorModal') {
+        // Initialize after a short delay to ensure elements are available
+        setTimeout(() => {
+          initializeGenerator();
+        }, 100);
+      }
+    }
+    
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = 'none';
+      document.body.style.overflow = 'auto'; // Enable scrolling again
+    }
+    
+    // Close modal when clicking outside of it
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    }
+    
+    // Theme Management
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeButtons(savedTheme);
+    
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      updateThemeButtons(theme);
+    }
+    
+    function updateThemeButtons(theme) {
+      const lightBtn = document.getElementById('lightBtn');
+      const darkBtn = document.getElementById('darkBtn');
+      
+      if (theme === 'light') {
+        lightBtn.classList.add('active');
+        darkBtn.classList.remove('active');
+      } else {
+        darkBtn.classList.add('active');
+        lightBtn.classList.remove('active');
+      }
+    }
+    
+    // Login credentials
+    const USERNAME = 'kramat';
+    const PASSWORD = 'kramat113';
+    
+    // Check if user is already logged in
+    document.addEventListener('DOMContentLoaded', () => {
+      if (sessionStorage.getItem('isLoggedIn') === 'true') {
+        showMainPage();
+      } else {
+        showLoginPage();
+      }
+      
+      // Disable right click, copy, paste, and developer tools
+      document.addEventListener('contextmenu', e => {
+        if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') {
+          return;
+        }
+        e.preventDefault();
+        return false;
+      });
+
+      ['copy', 'cut', 'paste'].forEach(event => {
+        document.addEventListener(event, e => {
+          if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') {
+            return;
+          }
+          e.preventDefault();
+          return false;
+        });
+      });
+
+      document.addEventListener('keydown', e => {
+        if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') {
+          return;
+        }
+
+        if (e.key === 'F12') {
+          e.preventDefault();
+          return false;
+        }
+        if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+          e.preventDefault();
+          return false;
+        }
+        if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+          e.preventDefault();
+          return false;
+        }
+        if (e.ctrlKey && e.key === 'u') {
+          e.preventDefault();
+          return false;
+        }
+      });
+    });
+    
+    // Login form submission
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      
+      if (username === USERNAME && password === PASSWORD) {
+        sessionStorage.setItem('isLoggedIn', 'true');
+        showMainPage();
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('loginError').style.display = 'none';
+        }, 3000);
+      }
+    });
+    
+    // Logout function
+    function logout() {
+      sessionStorage.removeItem('isLoggedIn');
+      showLoginPage();
+    }
+    
+    // Show login page
+    function showLoginPage() {
+      document.getElementById('loginPage').style.display = 'block';
+      document.getElementById('mainPage').style.display = 'none';
+      document.getElementById('logoutBtn').style.display = 'none';
+    }
+    
+    // Show main page
+    function showMainPage() {
+      document.getElementById('loginPage').style.display = 'none';
+      document.getElementById('mainPage').style.display = 'block';
+      document.getElementById('logoutBtn').style.display = 'block';
+    }
+
+    // Toggle random offer
+    let isRandomOfferEnabled = false;
+    
+    function toggleRandomOffer() {
+      isRandomOfferEnabled = !isRandomOfferEnabled;
+      const switchElement = document.getElementById('randomOfferSwitch');
+      const offerSelection = document.getElementById('offerSelection');
+      const offerCheckboxes = document.getElementById('offerCheckboxes');
+      const offerStats = document.getElementById('offerStats');
+      
+      if (isRandomOfferEnabled) {
+        switchElement.classList.add('active');
+        offerSelection.style.opacity = '0.5';
+        offerSelection.style.pointerEvents = 'none';
+        offerCheckboxes.classList.add('show');
+        offerStats.style.display = 'flex';
+      } else {
+        switchElement.classList.remove('active');
+        offerSelection.style.opacity = '1';
+        offerSelection.style.pointerEvents = 'auto';
+        offerCheckboxes.classList.remove('show');
+        offerStats.style.display = 'none';
+      }
+    }
+
+    function rand8() {
+      const c = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      let r = "";
+      for (let i = 0; i < 8; i++) {
+        r += c[Math.floor(Math.random() * c.length)];
+      }
+      return r;
+    }
+
+    // Define offers array
+    const offers = [
+      { id: 'offer1', url: "https://kramat11.github.io/landing-kahf-1766161652367/", name: "IMO", statId: 'imoStat', countId: 'imoCount' },
+      { id: 'offer2', url: "https://kramat11.github.io/KAHF", name: "TRAFEE", statId: 'trafeeStat', countId: 'trafeeCount' },
+      { id: 'offer3', url: "https://kramat11.github.io/coba3", name: "LP", statId: 'lpStat', countId: 'lpCount' }
+    ];
+
+    function generateRandom() {
+      const countInput = document.getElementById("linkCount");
+      const count = parseInt(countInput.value) || 100;
+      
+      if (count < 1) { showNotification("Jumlah link minimal 1!"); return; }
+      if (count > 1000) { showNotification("Jumlah link maksimal 1000!"); return; }
+      
+      let selectedOffers = [];
+      
+      if (isRandomOfferEnabled) {
+        // Get selected offers from checkboxes
+        selectedOffers = offers.filter(offer => {
+          return document.getElementById(offer.id).checked;
+        });
+        
+        // Check if at least one offer is selected
+        if (selectedOffers.length === 0) {
+          showNotification("Pilih minimal 1 offer untuk random!");
+          return;
+        }
+      } else {
+        // Use the selected offer from dropdown
+        const offerSelect = document.getElementById("offerSelect");
+        const selectedIndex = offerSelect.selectedIndex;
+        selectedOffers = [offers[selectedIndex]];
+      }
+      
+      const out = document.getElementById("randomOutput");
+      out.innerHTML = "";
+      window.randomLinks = "";
+      
+      // Initialize offer counters
+      const offerCounters = {};
+      offers.forEach(offer => {
+        offerCounters[offer.name] = 0;
+      });
+      
+      // Hide all offer stats initially
+      offers.forEach(offer => {
+        const statElement = document.getElementById(offer.statId);
+        if (statElement) {
+          statElement.style.display = 'none';
+        }
+      });
+      
+      // Show only selected offer stats
+      selectedOffers.forEach(offer => {
+        const statElement = document.getElementById(offer.statId);
+        if (statElement) {
+          statElement.style.display = 'block';
+        }
+      });
+      
+      // Generate links
+      for (let i = 0; i < count; i++) {
+        // Select a random offer from selected offers
+        const randomIndex = Math.floor(Math.random() * selectedOffers.length);
+        const selectedOffer = selectedOffers[randomIndex];
+        
+        // Increment counter for the selected offer
+        offerCounters[selectedOffer.name]++;
+        
+        const kode = rand8();
+        const link = `${selectedOffer.url}?${kode}`;
+        window.randomLinks += link + "\n";
+        out.innerHTML += `<a href="${link}" target="_blank">${link}</a>`;
+      }
+      
+      // Update offer stats if random is enabled
+      if (isRandomOfferEnabled) {
+        selectedOffers.forEach(offer => {
+          const countElement = document.getElementById(offer.countId);
+          if (countElement) {
+            countElement.textContent = offerCounters[offer.name];
+          }
+        });
+      }
+      
+      // Show result and copy button
+      document.getElementById("randomResult").style.display = "block";
+      document.getElementById("copyRandomBtn").style.display = "block";
+      
+      let notificationMessage;
+      if (isRandomOfferEnabled) {
+        const offerNames = selectedOffers.map(o => o.name).join(', ');
+        notificationMessage = `Berhasil generate ${count} link dengan random offer: ${offerNames}!`;
+      } else {
+        const offerSelect = document.getElementById("offerSelect");
+        notificationMessage = `Berhasil generate ${count} link dengan offer: ${offerSelect.options[offerSelect.selectedIndex].text.split(' - ')[1]}`;
+      }
+      
+      showNotification(notificationMessage);
+    }
+
+    function copyRandom() {
+      navigator.clipboard.writeText(window.randomLinks);
+      showNotification("Link berhasil dicopy!");
+    }
+
+    function convertToFB() {
+      const text = document.getElementById("inputLinks").value.trim();
+      if (!text) { showNotification("Paste link dulu!"); return; }
+      
+      const links = text.split("\n").map(l => l.trim()).filter(Boolean);
+      const out = document.getElementById("fbOutput");
+      out.innerHTML = "";
+      window.fbLinks = "";
+      
+      links.forEach(link => {
+        const encoded = encodeURIComponent(link);
+        const fbLink = `https://web.facebook.com/l.php?u=${encoded}`;
+        window.fbLinks += fbLink + "\n";
+        out.innerHTML += `<a href="${fbLink}" target="_blank">${fbLink}</a>`;
+      });
+      
+      // Show result and copy button
+      document.getElementById("fbResult").style.display = "block";
+      document.getElementById("copyFbBtn").style.display = "block";
+    }
+
+    function copyFB() {
+      navigator.clipboard.writeText(window.fbLinks);
+      showNotification("Semua link FB berhasil dicopy!");
+    }
+
+    function convertToWlRaw() {
+      const text = document.getElementById("inputWl").value.trim();
+      if (!text) { showNotification("Tempel link dulu!"); return; }
+      
+      const links = text.split("\n").map(l => l.trim()).filter(Boolean);
+      const out = document.getElementById("wlOutput");
+      out.innerHTML = "";
+      window.wlRawLinks = "";
+      
+      links.forEach(link => {
+        const wlLink = "https://l.wl.co/l?u=" + link;
+        window.wlRawLinks += wlLink + "\n";
+        out.innerHTML += `<a href="${wlLink}" target="_blank">${wlLink}</a>`;
+      });
+      
+      // Show result and copy button
+      document.getElementById("wlResult").style.display = "block";
+      document.getElementById("copyWlBtn").style.display = "block";
+    }
+
+    function copyWlRaw() {
+      navigator.clipboard.writeText(window.wlRawLinks);
+      showNotification("Semua link l.wl.co (raw) berhasil dicopy!");
+    }
+    
+    // Custom notification instead of alert
+    function showNotification(message) {
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--gradient-success);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-weight: 600;
+        box-shadow: var(--shadow-lg);
+        z-index: 10000;
+        font-size: 0.8rem;
+      `;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.remove();
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
