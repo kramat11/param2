@@ -43,6 +43,7 @@
       --gradient-secondary: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
       --gradient-accent: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
       --gradient-success: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+      --gradient-instagram: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     }
     
     [data-theme="dark"] {
@@ -81,6 +82,7 @@
       --gradient-secondary: linear-gradient(135deg, #60a5fa 0%, #22d3ee 100%);
       --gradient-accent: linear-gradient(135deg, #fbbf24 0%, #f87171 100%);
       --gradient-success: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      --gradient-instagram: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     }
     
     * { 
@@ -309,6 +311,7 @@
     .tool-card:nth-child(2)::before { background: var(--gradient-secondary); }
     .tool-card:nth-child(3)::before { background: var(--gradient-accent); }
     .tool-card:nth-child(4)::before { background: var(--gradient-success); }
+    .tool-card:nth-child(5)::before { background: var(--gradient-instagram); }
     
     .tool-icon {
       font-size: 2.5rem;
@@ -319,6 +322,7 @@
     .tool-card:nth-child(2) .tool-icon { color: var(--secondary); }
     .tool-card:nth-child(3) .tool-icon { color: var(--accent); }
     .tool-card:nth-child(4) .tool-icon { color: var(--success); }
+    .tool-card:nth-child(5) .tool-icon { color: #e1306c; }
     
     .tool-title {
       font-size: 1.1rem;
@@ -354,6 +358,13 @@
       color: transparent;
     }
     
+    .tool-card:nth-child(5) .tool-title {
+      background: var(--gradient-instagram);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
     .tool-description {
       font-size: 0.85rem;
       color: var(--text-secondary);
@@ -374,6 +385,7 @@
     .tool-card:nth-child(2) .tool-button { background: var(--gradient-secondary); color: white; }
     .tool-card:nth-child(3) .tool-button { background: var(--gradient-accent); color: white; }
     .tool-card:nth-child(4) .tool-button { background: var(--gradient-success); color: white; }
+    .tool-card:nth-child(5) .tool-button { background: var(--gradient-instagram); color: white; }
     
     /* Modal Styles */
     .modal {
@@ -929,6 +941,150 @@
       color: white;
     }
     
+    /* Styles for OTP Instagram */
+    .otp-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .api-key-container {
+      background: var(--bg-tertiary);
+      border: 1.5px solid var(--border-light);
+      border-radius: 10px;
+      padding: 15px;
+    }
+    
+    .api-key-input {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--bg-secondary);
+      border: 1.5px solid var(--border-light);
+      border-radius: 10px;
+      color: var(--text-primary);
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      margin-top: 8px;
+    }
+    
+    .number-container {
+      background: var(--bg-tertiary);
+      border: 1.5px solid var(--border-light);
+      border-radius: 10px;
+      padding: 15px;
+    }
+    
+    .number-display {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-medium);
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-align: center;
+      margin-top: 10px;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .otp-code-container {
+      background: var(--bg-tertiary);
+      border: 1.5px solid var(--border-light);
+      border-radius: 10px;
+      padding: 15px;
+    }
+    
+    .otp-code-display {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-medium);
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 1.5rem;
+      font-weight: 800;
+      text-align: center;
+      margin-top: 10px;
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 5px;
+      color: var(--primary);
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .btn-get-number, .btn-get-otp, .btn-cancel {
+      flex: 1;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-get-number {
+      background: var(--gradient-instagram);
+      color: white;
+    }
+    
+    .btn-get-otp {
+      background: var(--gradient-primary);
+      color: white;
+    }
+    
+    .btn-cancel {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      border: 1.5px solid var(--border-medium);
+    }
+    
+    .btn-get-number:hover, .btn-get-otp:hover, .btn-cancel:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .btn-get-number:disabled, .btn-get-otp:disabled, .btn-cancel:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .status-message {
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-align: center;
+      display: none;
+    }
+    
+    .status-success {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--success);
+    }
+    
+    .status-error {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: var(--danger);
+    }
+    
+    .status-info {
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: var(--primary);
+    }
+    
     footer {
       text-align: center;
       margin-top: 40px;
@@ -1012,7 +1168,7 @@
   <div id="mainPage" style="display: none; width: 100%;">
     <div class="main-container">
       <h1 style="text-align: center; margin-bottom: 10px;">Instalive Tools</h1>
-      <p class="subtitle" style="margin-bottom: 30px;">Generate random links • Facebook l.php bypass • l.wl.co raw debug (no encode)</p>
+      <p class="subtitle" style="margin-bottom: 30px;">Generate random links • Facebook l.php bypass • l.wl.co raw debug (no encode) • OTP Instagram</p>
 
       <div class="tools-container">
         <!-- CARD 1: RANDOM -->
@@ -1044,6 +1200,14 @@
           <div class="tool-icon">✍️</div>
           <h3 class="tool-title">Generator Kata & Username</h3>
           <p class="tool-description">Generate kata-kata dan username acak</p>
+          <button class="tool-button">BUKA</button>
+        </div>
+        
+        <!-- CARD 5: OTP Instagram -->
+        <div class="tool-card" onclick="openModal('otpModal')">
+          <div class="tool-icon">📱</div>
+          <h3 class="tool-title">OTP Instagram</h3>
+          <p class="tool-description">Ambil nomor dan kode OTP untuk Instagram</p>
           <button class="tool-button">BUKA</button>
         </div>
       </div>
@@ -1278,6 +1442,51 @@
               Refresh
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for OTP Instagram -->
+  <div id="otpModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" style="background: var(--gradient-instagram); -webkit-background-clip: text; background-clip: text; color: transparent;">OTP Instagram</h2>
+        <button class="modal-close" onclick="closeModal('otpModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="otp-container">
+          <!-- API Key Container -->
+          <div class="api-key-container">
+            <label for="apiKey">API Key otpcepat.org:</label>
+            <input type="text" id="apiKey" class="api-key-input" placeholder="Masukkan API Key Anda">
+          </div>
+          
+          <!-- Number Container -->
+          <div class="number-container">
+            <label>Nomor Telepon:</label>
+            <div id="numberDisplay" class="number-display">
+              Klik "Ambil Nomor" untuk mendapatkan nomor
+            </div>
+          </div>
+          
+          <!-- OTP Code Container -->
+          <div class="otp-code-container">
+            <label>Kode OTP:</label>
+            <div id="otpCodeDisplay" class="otp-code-display">
+              Menunggu kode OTP...
+            </div>
+          </div>
+          
+          <!-- Action Buttons -->
+          <div class="action-buttons">
+            <button id="getNumberBtn" class="btn-get-number" onclick="getNumber()">Ambil Nomor</button>
+            <button id="getOtpBtn" class="btn-get-otp" onclick="getOtp()" disabled>Dapatkan OTP</button>
+            <button id="cancelBtn" class="btn-cancel" onclick="cancelNumber()" disabled>Batalkan</button>
+          </div>
+          
+          <!-- Status Message -->
+          <div id="statusMessage" class="status-message"></div>
         </div>
       </div>
     </div>
@@ -2032,14 +2241,14 @@
     }
     
     // Custom notification instead of alert
-    function showNotification(message) {
+    function showNotification(message, type = 'success') {
       const notification = document.createElement('div');
       notification.style.cssText = `
         position: fixed;
         top: 20px;
         left: 50%;
         transform: translateX(-50%);
-        background: var(--gradient-success);
+        background: ${type === 'success' ? 'var(--gradient-success)' : type === 'error' ? 'var(--danger)' : 'var(--gradient-primary)'};
         color: white;
         padding: 10px 20px;
         border-radius: 6px;
@@ -2055,6 +2264,170 @@
         notification.remove();
       }, 2000);
     }
+    
+    // OTP Instagram Functions
+    let currentNumberId = null;
+    let otpInterval = null;
+    
+    // Function to get a number from OTP API
+    async function getNumber() {
+      const apiKey = document.getElementById('apiKey').value.trim();
+      
+      if (!apiKey) {
+        showStatusMessage('Silakan masukkan API Key terlebih dahulu!', 'error');
+        return;
+      }
+      
+      try {
+        showStatusMessage('Mengambil nomor...', 'info');
+        
+        // Disable buttons during API call
+        document.getElementById('getNumberBtn').disabled = true;
+        
+        // Call the API to get a number for Instagram
+        const response = await fetch(`https://otpcepat.org/api/getNumber?api_key=${apiKey}&service=ig`);
+        const data = await response.json();
+        
+        if (data.status === 'success') {
+          currentNumberId = data.id;
+          document.getElementById('numberDisplay').textContent = data.number;
+          document.getElementById('otpCodeDisplay').textContent = 'Menunggu kode OTP...';
+          
+          // Enable OTP and Cancel buttons
+          document.getElementById('getOtpBtn').disabled = false;
+          document.getElementById('cancelBtn').disabled = false;
+          
+          showStatusMessage('Nomor berhasil diambil! Gunakan nomor ini untuk mendaftar di Instagram.', 'success');
+        } else {
+          showStatusMessage(`Gagal mengambil nomor: ${data.message}`, 'error');
+          document.getElementById('getNumberBtn').disabled = false;
+        }
+      } catch (error) {
+        console.error('Error getting number:', error);
+        showStatusMessage('Terjadi kesalahan saat mengambil nomor. Periksa koneksi Anda.', 'error');
+        document.getElementById('getNumberBtn').disabled = false;
+      }
+    }
+    
+    // Function to get OTP code
+    async function getOtp() {
+      if (!currentNumberId) {
+        showStatusMessage('Tidak ada nomor yang aktif. Ambil nomor terlebih dahulu.', 'error');
+        return;
+      }
+      
+      try {
+        showStatusMessage('Mengambil kode OTP...', 'info');
+        
+        // Disable buttons during API call
+        document.getElementById('getOtpBtn').disabled = true;
+        
+        // Call the API to get OTP
+        const response = await fetch(`https://otpcepat.org/api/getOtp?id=${currentNumberId}`);
+        const data = await response.json();
+        
+        if (data.status === 'success') {
+          document.getElementById('otpCodeDisplay').textContent = data.otp;
+          showStatusMessage('Kode OTP berhasil diambil!', 'success');
+          
+          // Clear the interval if OTP is received
+          if (otpInterval) {
+            clearInterval(otpInterval);
+            otpInterval = null;
+          }
+        } else if (data.status === 'waiting') {
+          showStatusMessage('Menunggu kode OTP... Mohon tunggu beberapa saat lagi.', 'info');
+          
+          // Re-enable the button and set up auto-refresh
+          document.getElementById('getOtpBtn').disabled = false;
+          
+          // Set up automatic OTP checking if not already running
+          if (!otpInterval) {
+            otpInterval = setInterval(getOtp, 5000); // Check every 5 seconds
+          }
+        } else {
+          showStatusMessage(`Gagal mengambil OTP: ${data.message}`, 'error');
+          document.getElementById('getOtpBtn').disabled = false;
+        }
+      } catch (error) {
+        console.error('Error getting OTP:', error);
+        showStatusMessage('Terjadi kesalahan saat mengambil OTP. Periksa koneksi Anda.', 'error');
+        document.getElementById('getOtpBtn').disabled = false;
+      }
+    }
+    
+    // Function to cancel the current number
+    async function cancelNumber() {
+      if (!currentNumberId) {
+        showStatusMessage('Tidak ada nomor yang aktif.', 'error');
+        return;
+      }
+      
+      try {
+        showStatusMessage('Membatalkan nomor...', 'info');
+        
+        // Call the API to cancel the number
+        const response = await fetch(`https://otpcepat.org/api/cancelNumber?id=${currentNumberId}`);
+        const data = await response.json();
+        
+        if (data.status === 'success') {
+          showStatusMessage('Nomor berhasil dibatalkan.', 'success');
+        } else {
+          showStatusMessage(`Gagal membatalkan nomor: ${data.message}`, 'error');
+        }
+      } catch (error) {
+        console.error('Error canceling number:', error);
+        showStatusMessage('Terjadi kesalahan saat membatalkan nomor.', 'error');
+      } finally {
+        // Reset the UI
+        resetOtpUI();
+      }
+    }
+    
+    // Function to reset the OTP UI
+    function resetOtpUI() {
+      currentNumberId = null;
+      document.getElementById('numberDisplay').textContent = 'Klik "Ambil Nomor" untuk mendapatkan nomor';
+      document.getElementById('otpCodeDisplay').textContent = 'Menunggu kode OTP...';
+      
+      // Enable Get Number button and disable others
+      document.getElementById('getNumberBtn').disabled = false;
+      document.getElementById('getOtpBtn').disabled = true;
+      document.getElementById('cancelBtn').disabled = true;
+      
+      // Clear any running interval
+      if (otpInterval) {
+        clearInterval(otpInterval);
+        otpInterval = null;
+      }
+    }
+    
+    // Function to show status message
+    function showStatusMessage(message, type) {
+      const statusElement = document.getElementById('statusMessage');
+      statusElement.textContent = message;
+      statusElement.className = 'status-message status-' + type;
+      statusElement.style.display = 'block';
+      
+      // Auto-hide after 5 seconds
+      setTimeout(() => {
+        statusElement.style.display = 'none';
+      }, 5000);
+    }
+    
+    // Reset OTP UI when modal is closed
+    document.addEventListener('DOMContentLoaded', () => {
+      const otpModal = document.getElementById('otpModal');
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.attributeName === 'style' && otpModal.style.display === 'none') {
+            resetOtpUI();
+          }
+        });
+      });
+      
+      observer.observe(otpModal, { attributes: true });
+    });
   </script>
 </body>
 </html>
