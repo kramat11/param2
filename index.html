@@ -22,6 +22,7 @@
       --bg-secondary: #f8fafc;
       --bg-tertiary: #f1f5f9;
       --bg-card: #ffffff;
+      --bg-sidebar: #f8fafc;
       
       /* Text Colors */
       --text-primary: #1e293b;
@@ -61,6 +62,7 @@
       --bg-secondary: #1e293b;
       --bg-tertiary: #334155;
       --bg-card: #1e293b;
+      --bg-sidebar: #1e293b;
       
       /* Text Colors */
       --text-primary: #f1f5f9;
@@ -97,10 +99,7 @@
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
-      padding: 20px 10px;
       display: flex;
-      justify-content: center;
-      align-items: flex-start;
       transition: background 0.3s, color 0.3s;
       -webkit-user-select: none;
       -moz-user-select: none;
@@ -167,6 +166,147 @@
       box-shadow: var(--shadow-md);
     }
     
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border-light);
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      overflow-y: auto;
+      z-index: 100;
+      transition: transform 0.3s ease;
+    }
+    
+    .sidebar-header {
+      padding: 25px 20px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    
+    .sidebar-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 5px;
+    }
+    
+    .sidebar-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+    
+    .sidebar-nav {
+      padding: 20px 0;
+    }
+    
+    .nav-item {
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      margin: 5px 10px;
+      border-radius: 12px;
+    }
+    
+    .nav-item:hover {
+      background: var(--bg-tertiary);
+    }
+    
+    .nav-item.active {
+      background: var(--bg-card);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .nav-item.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--gradient-primary);
+      border-radius: 0 4px 4px 0;
+    }
+    
+    .nav-icon {
+      font-size: 1.5rem;
+      margin-right: 15px;
+      width: 30px;
+      text-align: center;
+    }
+    
+    .nav-item:nth-child(1) .nav-icon { color: var(--primary); }
+    .nav-item:nth-child(2) .nav-icon { color: var(--secondary); }
+    .nav-item:nth-child(3) .nav-icon { color: var(--accent); }
+    .nav-item:nth-child(4) .nav-icon { color: var(--success); }
+    .nav-item:nth-child(5) .nav-icon { color: #e1306c; }
+    
+    .nav-text {
+      flex: 1;
+    }
+    
+    .nav-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    
+    .nav-description {
+      font-size: 0.7rem;
+      color: var(--text-tertiary);
+    }
+    
+    /* Main Content */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    
+    .content-header {
+      margin-bottom: 30px;
+    }
+    
+    .content-title {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+    
+    .content-subtitle {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    
+    /* Content Container */
+    .content-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: var(--shadow-lg);
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    .content-container.active {
+      display: block;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Login Container */
     .login-container {
       background: var(--bg-card);
       border: 1px solid var(--border-medium);
@@ -176,6 +316,7 @@
       width: 100%;
       max-width: 320px;
       position: relative;
+      margin: 50px auto;
     }
     
     .login-container::before {
@@ -184,25 +325,6 @@
       top: 0; left: 0; right: 0; height: 3px;
       background: var(--gradient-primary);
       border-radius: 16px 16px 0 0;
-    }
-    
-    h1 {
-      text-align: center;
-      font-size: 1.8rem;
-      font-weight: 900;
-      background: var(--gradient-primary);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 8px;
-    }
-    
-    .subtitle {
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-bottom: 25px;
-      font-weight: 500;
     }
     
     .form-group {
@@ -265,194 +387,11 @@
       font-size: 0.75rem;
     }
     
-    /* Main Page Container */
-    .main-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    
-    /* Tool Cards Container */
-    .tools-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      width: 100%;
-      margin-bottom: 30px;
-    }
-    
-    /* Tool Card Styles */
-    .tool-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-medium);
-      border-radius: 16px;
-      padding: 25px;
-      box-shadow: var(--shadow-md);
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      min-height: 200px;
-      justify-content: center;
-      position: relative;
-    }
-    
-    .tool-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; height: 3px;
-      border-radius: 16px 16px 0 0;
-    }
-    
-    .tool-card:nth-child(1)::before { background: var(--gradient-primary); }
-    .tool-card:nth-child(2)::before { background: var(--gradient-secondary); }
-    .tool-card:nth-child(3)::before { background: var(--gradient-accent); }
-    .tool-card:nth-child(4)::before { background: var(--gradient-success); }
-    .tool-card:nth-child(5)::before { background: var(--gradient-instagram); }
-    
-    .tool-icon {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
-    }
-    
-    .tool-card:nth-child(1) .tool-icon { color: var(--primary); }
-    .tool-card:nth-child(2) .tool-icon { color: var(--secondary); }
-    .tool-card:nth-child(3) .tool-icon { color: var(--accent); }
-    .tool-card:nth-child(4) .tool-icon { color: var(--success); }
-    .tool-card:nth-child(5) .tool-icon { color: #e1306c; }
-    
-    .tool-title {
-      font-size: 1.1rem;
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-    
-    .tool-card:nth-child(1) .tool-title {
-      background: var(--gradient-primary);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    
-    .tool-card:nth-child(2) .tool-title {
-      background: var(--gradient-secondary);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    
-    .tool-card:nth-child(3) .tool-title {
-      background: var(--gradient-accent);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    
-    .tool-card:nth-child(4) .tool-title {
-      background: var(--gradient-success);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    
-    .tool-card:nth-child(5) .tool-title {
-      background: var(--gradient-instagram);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    
-    .tool-description {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-bottom: 15px;
-    }
-    
-    .tool-button {
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.8rem;
-      cursor: pointer;
-      width: auto;
-      margin: 0;
-    }
-    
-    .tool-card:nth-child(1) .tool-button { background: var(--gradient-primary); color: white; }
-    .tool-card:nth-child(2) .tool-button { background: var(--gradient-secondary); color: white; }
-    .tool-card:nth-child(3) .tool-button { background: var(--gradient-accent); color: white; }
-    .tool-card:nth-child(4) .tool-button { background: var(--gradient-success); color: white; }
-    .tool-card:nth-child(5) .tool-button { background: var(--gradient-instagram); color: white; }
-    
-    /* Modal Styles */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      z-index: 1000;
-    }
-    
-    .modal-content {
-      background: var(--bg-card);
-      border: 1px solid var(--border-medium);
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: var(--shadow-lg);
-      width: 90%;
-      max-width: 1200px;
-      max-height: 90vh;
-      margin: 5vh auto;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border-light);
-    }
-    
-    .modal-title {
-      font-size: 1.2rem;
-      font-weight: 800;
-    }
-    
-    .modal-close {
-      background: transparent;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--text-secondary);
-      width: auto;
-      margin: 0;
-      padding: 0;
-      height: auto;
-    }
-    
-    .modal-close:hover {
-      color: var(--danger);
-    }
-    
-    .modal-body {
-      flex-grow: 1;
-      overflow-y: auto;
-    }
-    
+    /* Random Links Styles */
     .side-by-side-container {
       display: flex;
       gap: 15px;
-      height: 350px;
+      height: 400px;
     }
 
     .input-panel {
@@ -538,12 +477,6 @@
       color: var(--text-primary);
       margin-bottom: 6px;
       display: block;
-    }
-    
-    .offer-info {
-      font-size: 0.7rem;
-      color: var(--text-secondary);
-      margin-top: 4px;
     }
     
     /* Style for random offer selection */
@@ -915,7 +848,7 @@
       color: white;
     }
     
-    /* Styles for OTP Instagram */
+    /* Styles for OTP Instagram Multi */
     .otp-container {
       display: flex;
       flex-direction: column;
@@ -1192,52 +1125,38 @@
       font-size: 0.9rem;
     }
     
-    footer {
-      text-align: center;
-      margin-top: 40px;
-      color: var(--text-tertiary);
-      font-size: 0.75rem;
-      font-weight: 500;
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: none;
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 1001;
+      background: var(--bg-card);
+      border: 1px solid var(--border-medium);
+      border-radius: 8px;
+      padding: 8px;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
     }
     
     /* Responsive Design */
     @media (max-width: 768px) {
-      .tools-container {
-        grid-template-columns: 1fr;
-        gap: 15px;
+      .mobile-menu-toggle {
+        display: block;
       }
       
-      .login-container {
-        max-width: 100%;
-        margin: 0 10px;
+      .sidebar {
+        transform: translateX(-100%);
       }
       
-      h1 {
-        font-size: 1.5rem;
+      .sidebar.open {
+        transform: translateX(0);
       }
       
-      .header-controls {
-        top: 10px;
-        right: 10px;
-      }
-      
-      .side-by-side-container {
-        flex-direction: column;
-        height: auto;
-      }
-
-      .input-panel {
-        flex: 1;
-        width: 100%;
-      }
-      
-      .result-panel {
-        min-height: 250px;
-      }
-      
-      .modal-content {
-        width: 95%;
-        margin: 2.5vh auto;
+      .main-content {
+        margin-left: 0;
+        padding: 70px 15px 15px;
       }
       
       .control-panel {
@@ -1255,10 +1174,33 @@
       .numbers-table-container {
         overflow-x: auto;
       }
+      
+      .side-by-side-container {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .input-panel {
+        flex: 1;
+        width: 100%;
+      }
+      
+      .result-panel {
+        min-height: 250px;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Mobile Menu Toggle -->
+  <div class="mobile-menu-toggle" onclick="toggleSidebar()">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </div>
+
   <!-- Header Controls -->
   <div class="header-controls">
     <button class="logout-btn" onclick="logout()" style="display: none;" id="logoutBtn">LOGOUT</button>
@@ -1287,367 +1229,333 @@
     </form>
   </div>
 
-  <!-- MAIN APP PAGE -->
-  <div id="mainPage" style="display: none; width: 100%;">
-    <div class="main-container">
-      <h1 style="text-align: center; margin-bottom: 10px;">Instalive Tools</h1>
-      <p class="subtitle" style="margin-bottom: 30px;">Generate random links • Facebook l.php bypass • l.wl.co raw debug (no encode) • OTP Instagram</p>
-
-      <div class="tools-container">
-        <!-- CARD 1: RANDOM -->
-        <div class="tool-card" onclick="openModal('randomModal')">
-          <div class="tool-icon">🔗</div>
-          <h3 class="tool-title">Generate Random Links</h3>
-          <p class="tool-description">Buat link acak dengan cepat dan mudah</p>
-          <button class="tool-button">BUKA</button>
-        </div>
-
-        <!-- CARD 2: FACEBOOK -->
-        <div class="tool-card" onclick="openModal('fbModal')">
-          <div class="tool-icon">📘</div>
-          <h3 class="tool-title">Facebook l.php Bypass</h3>
-          <p class="tool-description">Konversi link ke format Facebook l.php</p>
-          <button class="tool-button">BUKA</button>
-        </div>
-
-        <!-- CARD 3: l.wl.co RAW -->
-        <div class="tool-card" onclick="openModal('wlModal')">
-          <div class="tool-icon">🔧</div>
-          <h3 class="tool-title">l.wl.co Raw Debug</h3>
-          <p class="tool-description">Konversi link ke format l.wl.co tanpa encode</p>
-          <button class="tool-button">BUKA</button>
-        </div>
-        
-        <!-- CARD 4: Generator Kata & Username -->
-        <div class="tool-card" onclick="openModal('generatorModal')">
-          <div class="tool-icon">✍️</div>
-          <h3 class="tool-title">Generator Kata & Username</h3>
-          <p class="tool-description">Generate kata-kata dan username acak</p>
-          <button class="tool-button">BUKA</button>
-        </div>
-        
-        <!-- CARD 5: OTP Instagram -->
-        <div class="tool-card" onclick="openModal('otpModal')">
-          <div class="tool-icon">📱</div>
-          <h3 class="tool-title">OTP Instagram Multi</h3>
-          <p class="tool-description">Ambil banyak nomor & kode OTP untuk Instagram</p>
-          <button class="tool-button">BUKA</button>
+  <!-- SIDEBAR -->
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <h1 class="sidebar-title">Instalive Tools</h1>
+      <p class="sidebar-subtitle">Professional Link Management Suite</p>
+    </div>
+    
+    <nav class="sidebar-nav">
+      <div class="nav-item" onclick="showContent('random')">
+        <div class="nav-icon">🔗</div>
+        <div class="nav-text">
+          <div class="nav-title">Generate Random Links</div>
+          <div class="nav-description">Buat link acak dengan cepat</div>
         </div>
       </div>
-
-      <footer></footer>
-    </div>
+      
+      <div class="nav-item" onclick="showContent('facebook')">
+        <div class="nav-icon">📘</div>
+        <div class="nav-text">
+          <div class="nav-title">Facebook l.php Bypass</div>
+          <div class="nav-description">Konversi link ke format Facebook</div>
+        </div>
+      </div>
+      
+      <div class="nav-item" onclick="showContent('wlco')">
+        <div class="nav-icon">🔧</div>
+        <div class="nav-text">
+          <div class="nav-title">l.wl.co Raw Debug</div>
+          <div class="nav-description">Konversi link tanpa encode</div>
+        </div>
+      </div>
+      
+      <div class="nav-item" onclick="showContent('generator')">
+        <div class="nav-icon">✍️</div>
+        <div class="nav-text">
+          <div class="nav-title">Generator Kata & Username</div>
+          <div class="nav-description">Generate kata dan username acak</div>
+        </div>
+      </div>
+      
+      <div class="nav-item" onclick="showContent('otp')">
+        <div class="nav-icon">📱</div>
+        <div class="nav-text">
+          <div class="nav-title">OTP Instagram Multi</div>
+          <div class="nav-description">Ambil banyak nomor & kode OTP</div>
+        </div>
+      </div>
+    </nav>
   </div>
 
-  <!-- Modal for Random Links -->
-  <div id="randomModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title" style="background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent;">Generate Random Links</h2>
-        <button class="modal-close" onclick="closeModal('randomModal')">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="side-by-side-container">
-          <div class="input-panel">
-            <!-- Random Offer Toggle -->
-            <div class="random-offer-container">
-              <div class="random-offer-header">
-                <div class="random-offer-title">
-                  <span class="random-offer-icon">🎲</span>
-                  <span>Random Offer</span>
-                </div>
-                <div class="random-offer-toggle" id="randomOfferSwitch" onclick="toggleRandomOffer()"></div>
-              </div>
-              
-              <!-- Offer Checkboxes -->
-              <div class="offer-checkboxes" id="offerCheckboxes">
-                <div class="offer-checkbox-item">
-                  <input type="checkbox" id="offer1" checked>
-                  <label for="offer1" class="offer-checkbox-label">Offer 1 - IMO</label>
-                </div>
-                <div class="offer-checkbox-item">
-                  <input type="checkbox" id="offer2" checked>
-                  <label for="offer2" class="offer-checkbox-label">Offer 2 - TRAFEE</label>
-                </div>
-                <div class="offer-checkbox-item">
-                  <input type="checkbox" id="offer3" checked>
-                  <label for="offer3" class="offer-checkbox-label">Offer 3 - LP</label>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Offer Selection -->
-            <div class="offer-selection" id="offerSelection">
-              <label class="offer-label">Pilih Offer:</label>
-              <select id="offerSelect">
-                <option value="https://kramat11.github.io/landing-kahf-1766161652367/">Offer 1 - IMO </option>
-                <option value="https://kramat11.github.io/KAHF">Offer 2 - TRAFEE </option>
-                <option value="https://kramat11.github.io/coba3">Offer 3 - LP </option>
-              </select>
-              <div class="offer-info"></div>
-            </div>
-            
-            <!-- Offer Stats (shown when random is enabled) -->
-            <div class="offer-stats" id="offerStats" style="display: none;">
-              <div class="offer-stat" id="imoStat">
-                <div class="offer-stat-value" id="imoCount">0</div>
-                <div>IMO</div>
-              </div>
-              <div class="offer-stat" id="trafeeStat">
-                <div class="offer-stat-value" id="trafeeCount">0</div>
-                <div>TRAFEE</div>
-              </div>
-              <div class="offer-stat" id="lpStat">
-                <div class="offer-stat-value" id="lpCount">0</div>
-                <div>LP</div>
-              </div>
-            </div>
-            
-            <!-- Input for number of links, now larger and on its own line -->
-            <input type="number" id="linkCount" min="1" max="1000" value="100" placeholder="Jumlah link" class="large-number-input">
-            
-            <!-- Generate button -->
-            <button class="btn-generate" onclick="generateRandom()">GENERATE</button>
-            
-            <!-- Copy button -->
-            <button class="btn-copy" onclick="copyRandom()" id="copyRandomBtn" style="display: none;">COPY SEMUA LINK</button>
-          </div>
-          <div class="result-panel">
-            <div class="result" id="randomResult">
-              <div id="randomOutput"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="content-header">
+      <h2 id="contentTitle" class="content-title">Selamat Datang</h2>
+      <p id="contentSubtitle" class="content-subtitle">Pilih tool dari sidebar untuk memulai</p>
     </div>
-  </div>
-
-  <!-- Modal for Facebook -->
-  <div id="fbModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title" style="background: var(--gradient-secondary); -webkit-background-clip: text; background-clip: text; color: transparent;">Facebook l.php Bypass</h2>
-        <button class="modal-close" onclick="closeModal('fbModal')">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="side-by-side-container">
-          <div class="input-panel">
-            <textarea id="inputLinks" placeholder="Tempel link Instalive di sini..."></textarea>
-            <button class="btn-convert" onclick="convertToFB()">CONVERT KE FACEBOOK</button>
-            <button class="btn-copy" onclick="copyFB()" id="copyFbBtn" style="display: none;">COPY SEMUA FB LINK</button>
-          </div>
-          <div class="result-panel">
-            <div class="result" id="fbResult">
-              <div id="fbOutput"></div>
+    
+    <!-- RANDOM LINKS CONTENT -->
+    <div id="randomContent" class="content-container">
+      <div class="side-by-side-container">
+        <div class="input-panel">
+          <!-- Random Offer Toggle -->
+          <div class="random-offer-container">
+            <div class="random-offer-header">
+              <div class="random-offer-title">
+                <span class="random-offer-icon">🎲</span>
+                <span>Random Offer</span>
+              </div>
+              <div class="random-offer-toggle" id="randomOfferSwitch" onclick="toggleRandomOffer()"></div>
+            </div>
+            
+            <!-- Offer Checkboxes -->
+            <div class="offer-checkboxes" id="offerCheckboxes">
+              <div class="offer-checkbox-item">
+                <input type="checkbox" id="offer1" checked>
+                <label for="offer1" class="offer-checkbox-label">Offer 1 - IMO</label>
+              </div>
+              <div class="offer-checkbox-item">
+                <input type="checkbox" id="offer2" checked>
+                <label for="offer2" class="offer-checkbox-label">Offer 2 - TRAFEE</label>
+              </div>
+              <div class="offer-checkbox-item">
+                <input type="checkbox" id="offer3" checked>
+                <label for="offer3" class="offer-checkbox-label">Offer 3 - LP</label>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal for l.wl.co Raw -->
-  <div id="wlModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title" style="background: var(--gradient-accent); -webkit-background-clip: text; background-clip: text; color: transparent;">l.wl.co Raw Debug</h2>
-        <button class="modal-close" onclick="closeModal('wlModal')">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="side-by-side-container">
-          <div class="input-panel">
-            <textarea id="inputWl" placeholder="Tempel link yang sama, hasilnya tanpa %3A %2F"></textarea>
-            <button class="btn-wl" onclick="convertToWlRaw()">CONVERT KE l.wl.co (RAW)</button>
-            <button class="btn-copy" onclick="copyWlRaw()" id="copyWlBtn" style="display: none;">COPY SEMUA l.wl.co</button>
-          </div>
-          <div class="result-panel">
-            <div class="result" id="wlResult">
-              <div id="wlOutput"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal for Generator Kata & Username -->
-  <div id="generatorModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title" style="background: var(--gradient-success); -webkit-background-clip: text; background-clip: text; color: transparent;">Generator Kata & Username</h2>
-        <button class="modal-close" onclick="closeModal('generatorModal')">&times;</button>
-      </div>
-      <div class="modal-body">
-        <!-- Tab Navigation -->
-        <div class="tab-navigation">
-          <button class="tab-button active" data-tab="sentence">kata-kata</button>
-          <button class="tab-button" data-tab="username">Username</button>
-        </div>
-        
-        <!-- Tab Content for Sentence Generator -->
-        <div id="sentence-tab" class="tab-content active">
-          <div class="country-selector">
-            <label for="country-select">Negara:</label>
-            <select id="country-select">
-              <option value="america">America</option>
-              <option value="germany">Germany</option>
-              <option value="france">France</option>
-              <option value="brazil">Brazil</option>
+          
+          <!-- Offer Selection -->
+          <div class="offer-selection" id="offerSelection">
+            <label class="offer-label">Pilih Offer:</label>
+            <select id="offerSelect">
+              <option value="https://kramat11.github.io/landing-kahf-1766161652367/">Offer 1 - IMO </option>
+              <option value="https://kramat11.github.io/KAHF">Offer 2 - TRAFEE </option>
+              <option value="https://kramat11.github.io/coba3">Offer 3 - LP </option>
             </select>
+            <div class="offer-info"></div>
           </div>
           
-          <div id="sentence-container" class="sentence-container">
-            <div id="sentence-display" class="sentence-display">
-              <!-- Kalimat acak akan muncul di sini -->
+          <!-- Offer Stats (shown when random is enabled) -->
+          <div class="offer-stats" id="offerStats" style="display: none;">
+            <div class="offer-stat" id="imoStat">
+              <div class="offer-stat-value" id="imoCount">0</div>
+              <div>IMO</div>
             </div>
-            <button id="copy-btn" class="copy-btn" title="Salin ke clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
-              </svg>
-            </button>
+            <div class="offer-stat" id="trafeeStat">
+              <div class="offer-stat-value" id="trafeeCount">0</div>
+              <div>TRAFEE</div>
+            </div>
+            <div class="offer-stat" id="lpStat">
+              <div class="offer-stat-value" id="lpCount">0</div>
+              <div>LP</div>
+            </div>
           </div>
-
-          <div class="button-group">
-            <button id="generate-btn" class="generate-btn">Generate kata2</button>
-            <button id="refresh-sentence-btn" class="refresh-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
-              </svg>
-              Refresh
-            </button>
-          </div>
+          
+          <!-- Input for number of links, now larger and on its own line -->
+          <input type="number" id="linkCount" min="1" max="1000" value="100" placeholder="Jumlah link" class="large-number-input">
+          
+          <!-- Generate button -->
+          <button class="btn-generate" onclick="generateRandom()">GENERATE</button>
+          
+          <!-- Copy button -->
+          <button class="btn-copy" onclick="copyRandom()" id="copyRandomBtn" style="display: none;">COPY SEMUA LINK</button>
         </div>
-        
-        <!-- Tab Content for Username Generator -->
-        <div id="username-tab" class="tab-content">
-          <!-- Mode Selector -->
-          <div class="mode-selector">
-            <div class="mode-option active" data-mode="random">Generate Acak</div>
-            <div class="mode-option" data-mode="custom">nama lengkap</div>
-            <div class="mode-option" data-mode="extract">Ekstrak dari Username</div>
-          </div>
-          
-          <!-- Random Mode Content -->
-          <div id="random-mode-content" class="mode-content">
-            <div class="quantity-selector">
-              <label for="quantity-input">Jumlah Username:</label>
-              <input type="number" id="quantity-input" min="1" max="100" value="" placeholder="Masukkan jumlah...">
-            </div>
-          </div>
-          
-          <!-- Custom Mode Content -->
-          <div id="custom-mode-content" class="mode-content" style="display: none;">
-            <div class="names-input-selector">
-              <label for="names-input">Masukkan Nama (satu per baris):</label>
-              <textarea id="names-input" placeholder="John Doe&#10;Jane Smith&#10;Ahmad Abdullah"></textarea>
-            </div>
-          </div>
-          
-          <!-- Extract Mode Content -->
-          <div id="extract-mode-content" class="mode-content" style="display: none;">
-            <div class="username-input-selector">
-              <label for="usernames-input">Masukkan Username (satu per baris):</label>
-              <textarea id="usernames-input" placeholder="dixie_garfield19&#10;priscilla_pinehurst32&#10;cadence_renfield13&#10;renee_dudley85&#10;crystal_thacker55"></textarea>
-            </div>
-          </div>
-          
-          <!-- Result textarea for both generate and extract -->
-          <textarea id="usernames-result" readonly placeholder="Hasil akan muncul di sini..."></textarea>
-
-          <div class="button-group">
-            <button id="generate-usernames-btn" class="generate-btn">Generate Username</button>
-            <button id="extract-names-btn" class="extract-btn" style="display: none;">Ekstrak Nama</button>
-            <button id="copy-all-btn" class="copy-all-btn">Salin Semua</button>
-            <button id="refresh-username-btn" class="refresh-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
-              </svg>
-              Refresh
-            </button>
+        <div class="result-panel">
+          <div class="result" id="randomResult">
+            <div id="randomOutput"></div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Modal for OTP Instagram Multi -->
-  <div id="otpModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title" style="background: var(--gradient-instagram); -webkit-background-clip: text; background-clip: text; color: transparent;">OTP Instagram Multi</h2>
-        <button class="modal-close" onclick="closeModal('otpModal')">&times;</button>
+    
+    <!-- FACEBOOK CONTENT -->
+    <div id="facebookContent" class="content-container">
+      <div class="side-by-side-container">
+        <div class="input-panel">
+          <textarea id="inputLinks" placeholder="Tempel link Instalive di sini..."></textarea>
+          <button class="btn-convert" onclick="convertToFB()">CONVERT KE FACEBOOK</button>
+          <button class="btn-copy" onclick="copyFB()" id="copyFbBtn" style="display: none;">COPY SEMUA FB LINK</button>
+        </div>
+        <div class="result-panel">
+          <div class="result" id="fbResult">
+            <div id="fbOutput"></div>
+          </div>
+        </div>
       </div>
-      <div class="modal-body">
-        <div class="otp-container">
-          <!-- API Key Container -->
-          <div class="api-key-container">
-            <label for="apiKey">API Key otpcepat.org:</label>
-            <input type="text" id="apiKey" class="api-key-input" placeholder="Masukkan API Key Anda">
+    </div>
+    
+    <!-- WL.CO CONTENT -->
+    <div id="wlcoContent" class="content-container">
+      <div class="side-by-side-container">
+        <div class="input-panel">
+          <textarea id="inputWl" placeholder="Tempel link yang sama, hasilnya tanpa %3A %2F"></textarea>
+          <button class="btn-wl" onclick="convertToWlRaw()">CONVERT KE l.wl.co (RAW)</button>
+          <button class="btn-copy" onclick="copyWlRaw()" id="copyWlBtn" style="display: none;">COPY SEMUA l.wl.co</button>
+        </div>
+        <div class="result-panel">
+          <div class="result" id="wlResult">
+            <div id="wlOutput"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- GENERATOR CONTENT -->
+    <div id="generatorContent" class="content-container">
+      <!-- Tab Navigation -->
+      <div class="tab-navigation">
+        <button class="tab-button active" data-tab="sentence">kata-kata</button>
+        <button class="tab-button" data-tab="username">Username</button>
+      </div>
+      
+      <!-- Tab Content for Sentence Generator -->
+      <div id="sentence-tab" class="tab-content active">
+        <div class="country-selector">
+          <label for="country-select">Negara:</label>
+          <select id="country-select">
+            <option value="america">America</option>
+            <option value="germany">Germany</option>
+            <option value="france">France</option>
+            <option value="brazil">Brazil</option>
+          </select>
+        </div>
+        
+        <div id="sentence-container" class="sentence-container">
+          <div id="sentence-display" class="sentence-display">
+            <!-- Kalimat acak akan muncul di sini -->
+          </div>
+          <button id="copy-btn" class="copy-btn" title="Salin ke clipboard">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="button-group">
+          <button id="generate-btn" class="generate-btn">Generate kata2</button>
+          <button id="refresh-sentence-btn" class="refresh-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+            </svg>
+            Refresh
+          </button>
+        </div>
+      </div>
+      
+      <!-- Tab Content for Username Generator -->
+      <div id="username-tab" class="tab-content">
+        <!-- Mode Selector -->
+        <div class="mode-selector">
+          <div class="mode-option active" data-mode="random">Generate Acak</div>
+          <div class="mode-option" data-mode="custom">nama lengkap</div>
+          <div class="mode-option" data-mode="extract">Ekstrak dari Username</div>
+        </div>
+        
+        <!-- Random Mode Content -->
+        <div id="random-mode-content" class="mode-content">
+          <div class="quantity-selector">
+            <label for="quantity-input">Jumlah Username:</label>
+            <input type="number" id="quantity-input" min="1" max="100" value="" placeholder="Masukkan jumlah...">
+          </div>
+        </div>
+        
+        <!-- Custom Mode Content -->
+        <div id="custom-mode-content" class="mode-content" style="display: none;">
+          <div class="names-input-selector">
+            <label for="names-input">Masukkan Nama (satu per baris):</label>
+            <textarea id="names-input" placeholder="John Doe&#10;Jane Smith&#10;Ahmad Abdullah"></textarea>
+          </div>
+        </div>
+        
+        <!-- Extract Mode Content -->
+        <div id="extract-mode-content" class="mode-content" style="display: none;">
+          <div class="username-input-selector">
+            <label for="usernames-input">Masukkan Username (satu per baris):</label>
+            <textarea id="usernames-input" placeholder="dixie_garfield19&#10;priscilla_pinehurst32&#10;cadence_renfield13&#10;renee_dudley85&#10;crystal_thacker55"></textarea>
+          </div>
+        </div>
+        
+        <!-- Result textarea for both generate and extract -->
+        <textarea id="usernames-result" readonly placeholder="Hasil akan muncul di sini..."></textarea>
+
+        <div class="button-group">
+          <button id="generate-usernames-btn" class="generate-btn">Generate Username</button>
+          <button id="extract-names-btn" class="extract-btn" style="display: none;">Ekstrak Nama</button>
+          <button id="copy-all-btn" class="copy-all-btn">Salin Semua</button>
+          <button id="refresh-username-btn" class="refresh-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+            </svg>
+            Refresh
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- OTP CONTENT -->
+    <div id="otpContent" class="content-container">
+      <div class="otp-container">
+        <!-- API Key Container -->
+        <div class="api-key-container">
+          <label for="apiKey">API Key otpcepat.org:</label>
+          <input type="text" id="apiKey" class="api-key-input" placeholder="Masukkan API Key Anda">
+        </div>
+        
+        <!-- Control Panel -->
+        <div class="control-panel">
+          <div class="control-group">
+            <label class="control-label">Negara:</label>
+            <div class="number-quantity" style="padding: 10px 14px; background: var(--bg-secondary); border: 1.5px solid var(--border-light); border-radius: 10px; color: var(--text-primary); font-size: 13px; font-family: 'Inter', sans-serif;">
+              🇮🇩 Indonesia (+62)
+            </div>
           </div>
           
-          <!-- Control Panel -->
-          <div class="control-panel">
-            <div class="control-group">
-              <label class="control-label">Negara:</label>
-              <select id="countrySelect" class="number-quantity">
-                <option value="">Pilih Negara</option>
-              </select>
-            </div>
-            
-            <div class="control-group">
-              <label class="control-label">Operator:</label>
-              <select id="operatorSelect" class="number-quantity" disabled>
-                <option value="">Pilih Operator</option>
-              </select>
-            </div>
-            
-            <div class="control-group">
-              <label class="control-label">Jumlah Nomor:</label>
-              <input type="number" id="numberQuantity" class="number-quantity" min="1" max="50" value="5">
+          <div class="control-group">
+            <label class="control-label">Operator:</label>
+            <div class="number-quantity" style="padding: 10px 14px; background: var(--bg-secondary); border: 1.5px solid var(--border-light); border-radius: 10px; color: var(--text-primary); font-size: 13px; font-family: 'Inter', sans-serif;">
+              🎲 Random
             </div>
           </div>
           
-          <!-- Action Buttons -->
-          <div class="action-buttons">
-            <button id="getNumbersBtn" class="btn-get-numbers" onclick="getMultipleNumbers()">
-              <span>📱</span> Ambil Nomor
-            </button>
-            <button id="getAllOtpBtn" class="btn-get-all-otp" onclick="getAllOtp()" disabled>
-              <span>🔑</span> Ambil Semua OTP
-            </button>
-            <button id="cancelAllBtn" class="btn-cancel-all" onclick="cancelAllNumbers()" disabled>
-              <span>❌</span> Batalkan Semua
-            </button>
-            <button id="exportBtn" class="btn-export" onclick="exportNumbers()" disabled>
-              <span>📥</span> Export Data
-            </button>
+          <div class="control-group">
+            <label class="control-label">Jumlah Nomor:</label>
+            <input type="number" id="numberQuantity" class="number-quantity" min="1" max="50" value="5">
           </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button id="getNumbersBtn" class="btn-get-numbers" onclick="getMultipleNumbers()">
+            <span>📱</span> Ambil Nomor
+          </button>
+          <button id="getAllOtpBtn" class="btn-get-all-otp" onclick="getAllOtp()" disabled>
+            <span>🔑</span> Ambil Semua OTP
+          </button>
+          <button id="cancelAllBtn" class="btn-cancel-all" onclick="cancelAllNumbers()" disabled>
+            <span>❌</span> Batalkan Semua
+          </button>
+          <button id="exportBtn" class="btn-export" onclick="exportNumbers()" disabled>
+            <span>📥</span> Export Data
+          </button>
+        </div>
+        
+        <!-- Status Message -->
+        <div id="statusMessage" class="status-message"></div>
+        
+        <!-- Numbers Table -->
+        <div class="numbers-table-container">
+          <table class="numbers-table">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nomor Telepon</th>
+                <th>Kode OTP</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="numbersTableBody">
+              <!-- Table rows will be added dynamically -->
+            </tbody>
+          </table>
           
-          <!-- Status Message -->
-          <div id="statusMessage" class="status-message"></div>
-          
-          <!-- Numbers Table -->
-          <div class="numbers-table-container">
-            <table class="numbers-table">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Nomor Telepon</th>
-                  <th>Kode OTP</th>
-                  <th>Status</th>
-                  <th>Aksi</th>
-                </tr>
-              </thead>
-              <tbody id="numbersTableBody">
-                <!-- Table rows will be added dynamically -->
-              </tbody>
-            </table>
-            
-            <!-- Empty State -->
-            <div id="emptyState" class="empty-state">
-              <div class="empty-state-icon">📱</div>
-              <div class="empty-state-text">Belum ada nomor yang diambil. Klik "Ambil Nomor" untuk memulai.</div>
-            </div>
+          <!-- Empty State -->
+          <div id="emptyState" class="empty-state">
+            <div class="empty-state-icon">📱</div>
+            <div class="empty-state-text">Belum ada nomor yang diambil. Klik "Ambil Nomor" untuk memulai.</div>
           </div>
         </div>
       </div>
@@ -1698,6 +1606,431 @@
     const lastNames = [
       "Anderson","Armstrong","Bailey","Baker","Baldwin","Barnes","Bennett","Bishop","Blackwood","Blake","Bolton","Bradford","Bridges","Brooks","Brown","Campbell","Carter","Chandler","Clarke","Clayton","Cole","Collins","Cooper","Cox","Crawford","Daniels","Dawson","Davis","Dixon","Donovan","Douglas","Doyle","Edwards","Ellis","Emerson","Fisher","Fleming","Foster","Fox","Franklin","Ackerman","Adams","Adderley","Albright","Alden","Aldridge","Allerton","Ashford","Ashton","Atwood","Barclay","Barrett","Beaumont","Beckett","Bellamy","Benton","Berkeley","Bingham","Bishopson","Blackburn","Blackwell","Bloomfield","Bloomberg","Brixton","Brinton","Brockman","Bromley","Buckley","Burton","Byrne","Caldwell","Callahan","Calloway","Carlisle","Carmichael","Carrington","Carver","Chamberlain","Channing","Chapman","Charleston","Chesterton","Claymore","Clifford","Clifton","Cleveland","Clemens","Crockett","Crossley","Cumberland","Dalton","Davenport","Delaney","Dennison","Derbyshire","Devonshire","Donnelly","Draper","Drayton","Dunbar","Easton","Eaton","Ellington","Ellsworth","Elridge","Embry","Emberton","Fairchild","Fairfax","Falkner","Farrington","Fenton","Ferris","Finnegan","Fitzgerald","Fitzpatrick","Fleetwood","Fleming","Forbes","Foreman","Fosterly","Garrison","Gatlin","Gillespie","Gladstone","Godfrey","Goldberg","Goodwin","Granger","Greenfield","Greystone","Grimsley","Harrington","Hathaway","Hayward","Hemingway","Hollister","Holloway","Hollingsworth","Huxley","Ingram","Irving","Jefferson","Jennison","Jericho","Kensington","Kerrigan","Kingsley","Kirkland","Kingsford","Lancaster","Landry","Langston","Larrimore","Lennox","Leroy","Linden","Lockwood","Longley","Lovelace","Madison","Marlow","Marsden","Merrick","Merritt","Middleton","Montgomery","Montague","Moreland","Mulberry","Northwood","Norwood","Oakley","Orwell","Osborne","Oxford","Paddock","Paxton","Pendleton","Pennington","Pemberton","Prescott","Princeton","Pritchard","Quinlan","Radcliffe","Rafferty","Ramone","Redford","Remington","Renfield","Rockwell","Rosenberg","Rutherford","Salinger","Sanderson","Sanford","Schneider","Sheffield","Sherman","Shepherd","Silverman","Simmons","Sinclair","Somerset","Southwell","Stanford","Sterling","Stratford","Sutherland","Tanner","Tennyson","Thatcher","Thornton","Thurman","Tolliver","Townsend","Trenton","Truman","Underwood","Valentine","VanAllen","VanBuren","VanDermeer","Vanderbilt","Vega","Vernon","Warner","Waldorf","Waverly","Wentworth","Whitaker","Whitman","Wilder","Wilkinson","Winchester","Winslow","Winton","Woodard","Worthington","Wellington","Yorkshire","Yardley","Yarborough","Zimmerman","Ziegler","Whitlock","Adler","Ainsworth","Ashbury","Ashcroft","Astor","Bainbridge","Banner","Bardwell","Barington","Barringer","Beckford","Berrington","Billingham","Birchwood","Blackthorn","Blaisdell","Blakemore","Bloomstein","Bracken","Brayden","Briarwood","Brigham","Brighton","Brimhall","Bristol","Broadmoor","Bromfield","Brookshire","Broughton","Browning","Bryson","Buckingham","Burbank","Calderon","Calhoun","Carlstead","Carling","Carmine","Carrigan","Cavanaugh","Cavendish","Chadwick","Chalmers","Chandley","Channington","Chase","Churchill","Claremont","Clemington","Cobalt","Colborne","Colbridge","Colter","Connelly","Compton","Conway","Corbin","Cornwell","Corwin","Cranford","Crandall","Cranston","Creighton","Cromwell","Crenshaw","Creswell","Cunningham","Dallington","Dalrymple","Damascus","Danbury","Darrow","Deacon","Denham","Derringer","Devlin","Dickerson","Dillinger","Dimaggio","Donahue","Drummond","Dudley","Duncan","Dunham","Eastgate","Eastland","Eastwick","Eddington","Eddison","Ellsworth","Elmwood","Emsworth","Endicott","Everton","Fairbanks","Fairborne","Fairleigh","Falwell","Farnsworth","Fenwick","Fernwood","Ferrington","Fielding","Finch","Finsbury","Fitzroy","Fleet","Fletcher","Flint","Florence","Folsom","Fontaine","Forsythe","Fosterfield","Foxworth","François","Frampton","Galen","Galloway","Garfield","Garrisonson","Gatsby","Gentry","Gilmore","Gladwin","Goddard","Goldwin","Grafton","Grantham","Graysen","Greyson","Grimsdale","Gulliver","Hadley","Hargreaves","Harriman","Hartford","Hartwick","Hastings","Hawthorne","Haymer","Hennessy","Hensley","Hightower","Hillsborough","Hollander","Hollins","Holcroft","Hollman","Hollowell","Holland","Huxford","Hyde","Jasper","Jenkins","Jolley","Kendale","Kendrick","Kenswell","Kensmore","Kingsbridge","Kingsmore","Kingsbury","Kingston","Kipling","Kirkpatrick","Knox","Lancasterson","Langmore","Langley","Langridge","Lathan","Laurent","Laughton","Leighton","Lemont","Lennard","Lindenwood","Linton","Lockridge","Longford","Lynwood","MacAllister","MacArthur","MacGregor","MacKenzie","MacLaren","Maddox","Madrid","Maguire","Manchester","Mansfield","Marbury","Marchand","Mariner","Markham","Marlowe","Marshell","Martell","Maynard","Mercer","Meredith","Merton","Middleson","Milburn","Millerton","Millhouse","Milligan","Millwood","Milton","Montrose","Morley","Mortimer","Morrigan","Mulford","Neville","Newberry","Newfield","Newgate","Newkirk","Nightingale","Nixon","Northwoodson","Norwell","Oakridge","Oberlin","O'Rourke","Olsen","Onslow","Orion","Ormsby","Oswald","Overton","Parkinson","Parsley","Paterson","Pendragon","Penn","Perkins","Perrington","Peterson","Pickering","Pike","Pinehurst","Pratt","Presley","Princetonson","Prior","Radley","Redmond","Reeves","Reinhart","Renshaw","Reynard","Ridgeway","Riggs","Rivers","Rivington","Rockford","Rockridge","Rogers","Romilly","Rowland","Rowley","Rutherfordson","Sandford","Samuels","Saxby","Schaefer","Schultz","Sedgwick","Selwyn","Seymour","Shannon","Sharpe","Shipman","Silverwood","Sinclairson","Slater","Smalls","Somerville","Southgate","Stark","Stanton","St. Claire","Steadman","Steadwell","Stillwater","Stone","Stonebridge","Storm","Stout","Strickland","Sutherlandson","Talisman","Tannerly","Templeton","Tennysonson","Thacker","Thorn","Thorntonson","Thornefield","Tidwell","Tilbury","Tollinson","Tollman","Torres","Townley","Travilian","Trevor","Trueman","Tucker","Underhill","Underly","Upton","Valletta","Vallaire","Valmont","Vance","Vanderlyn","VanHolt","VanKeller","Vaughn","Velasquez","Veridian","Vickers","Vincent","Voss","Wainwright","Wakefield","Walden","Wallingford","Warfield","Warley","Warrington","Waterford","Weatherby","Weldon","Wesley","Westbrook","Westfall","Whitmore","Whitstone","Wickham","Wilberton","Wilde","Winfield","Winspear","Wintonson","Wolfe","Woodrow","Wortham","Wycliffe","Wynter","Yarrow","Yeager","York","Youngblood","Zander","Zimmer"
     ];
+
+    // Global variables
+    let currentContent = null;
+    let isRandomOfferEnabled = false;
+    let numbersList = [];
+    let otpCheckIntervals = {};
+    let instagramServiceId = null;
+
+    // Toggle sidebar for mobile
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('open');
+    }
+
+    // Show content based on selection
+    function showContent(contentType) {
+      // Hide all content containers
+      document.querySelectorAll('.content-container').forEach(container => {
+        container.classList.remove('active');
+      });
+      
+      // Remove active class from all nav items
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      
+      // Show selected content
+      const contentElement = document.getElementById(contentType + 'Content');
+      if (contentElement) {
+        contentElement.classList.add('active');
+        currentContent = contentType;
+        
+        // Update header
+        updateContentHeader(contentType);
+        
+        // Add active class to selected nav item
+        const navItems = document.querySelectorAll('.nav-item');
+        const contentIndex = ['random', 'facebook', 'wlco', 'generator', 'otp'].indexOf(contentType);
+        if (contentIndex !== -1 && navItems[contentIndex]) {
+          navItems[contentIndex].classList.add('active');
+        }
+        
+        // Initialize content if needed
+        if (contentType === 'generator') {
+          setTimeout(() => initializeGenerator(), 100);
+        } else if (contentType === 'otp') {
+          setTimeout(() => initializeOtpContent(), 100);
+        }
+        
+        // Close sidebar on mobile
+        if (window.innerWidth <= 768) {
+          document.getElementById('sidebar').classList.remove('open');
+        }
+      }
+    }
+
+    // Update content header
+    function updateContentHeader(contentType) {
+      const titleElement = document.getElementById('contentTitle');
+      const subtitleElement = document.getElementById('contentSubtitle');
+      
+      const headers = {
+        random: {
+          title: 'Generate Random Links',
+          subtitle: 'Buat link acak dengan cepat dan mudah'
+        },
+        facebook: {
+          title: 'Facebook l.php Bypass',
+          subtitle: 'Konversi link ke format Facebook l.php'
+        },
+        wlco: {
+          title: 'l.wl.co Raw Debug',
+          subtitle: 'Konversi link ke format l.wl.co tanpa encode'
+        },
+        generator: {
+          title: 'Generator Kata & Username',
+          subtitle: 'Generate kata-kata dan username acak'
+        },
+        otp: {
+          title: 'OTP Instagram Multi',
+          subtitle: 'Ambil banyak nomor & kode OTP untuk Instagram'
+        }
+      };
+      
+      if (headers[contentType]) {
+        titleElement.textContent = headers[contentType].title;
+        subtitleElement.textContent = headers[contentType].subtitle;
+      }
+    }
+
+    // Theme Management
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeButtons(savedTheme);
+    
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      updateThemeButtons(theme);
+    }
+    
+    function updateThemeButtons(theme) {
+      const lightBtn = document.getElementById('lightBtn');
+      const darkBtn = document.getElementById('darkBtn');
+      
+      if (theme === 'light') {
+        lightBtn.classList.add('active');
+        darkBtn.classList.remove('active');
+      } else {
+        darkBtn.classList.add('active');
+        lightBtn.classList.remove('active');
+      }
+    }
+
+    // Login credentials
+    const USERNAME = 'kramat';
+    const PASSWORD = 'kramat113';
+    
+    // Check if user is already logged in
+    document.addEventListener('DOMContentLoaded', () => {
+      if (sessionStorage.getItem('isLoggedIn') === 'true') {
+        showMainPage();
+        showContent('random'); // Show default content
+      } else {
+        showLoginPage();
+      }
+      
+      // Disable right click, copy, paste, and developer tools
+      document.addEventListener('contextmenu', e => {
+        if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') {
+          return;
+        }
+        e.preventDefault();
+        return false;
+      });
+
+      ['copy', 'cut', 'paste'].forEach(event => {
+        document.addEventListener(event, e => {
+          if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') {
+            return;
+          }
+          e.preventDefault();
+          return false;
+        });
+      });
+
+      document.addEventListener('keydown', e => {
+        if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') {
+          return;
+        }
+
+        if (e.key === 'F12') {
+          e.preventDefault();
+          return false;
+        }
+        if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+          e.preventDefault();
+          return false;
+        }
+        if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+          e.preventDefault();
+          return false;
+        }
+        if (e.ctrlKey && e.key === 'u') {
+          e.preventDefault();
+          return false;
+        }
+      });
+    });
+    
+    // Login form submission
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      
+      if (username === USERNAME && password === PASSWORD) {
+        sessionStorage.setItem('isLoggedIn', 'true');
+        showMainPage();
+        showContent('random'); // Show default content
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('loginError').style.display = 'none';
+        }, 3000);
+      }
+    });
+    
+    // Logout function
+    function logout() {
+      sessionStorage.removeItem('isLoggedIn');
+      showLoginPage();
+    }
+    
+    // Show login page
+    function showLoginPage() {
+      document.getElementById('loginPage').style.display = 'block';
+      document.querySelector('.sidebar').style.display = 'none';
+      document.querySelector('.main-content').style.display = 'none';
+      document.getElementById('logoutBtn').style.display = 'none';
+      document.querySelector('.mobile-menu-toggle').style.display = 'none';
+    }
+    
+    // Show main page
+    function showMainPage() {
+      document.getElementById('loginPage').style.display = 'none';
+      document.querySelector('.sidebar').style.display = 'block';
+      document.querySelector('.main-content').style.display = 'block';
+      document.getElementById('logoutBtn').style.display = 'block';
+      document.querySelector('.mobile-menu-toggle').style.display = 'block';
+    }
+
+    // Toggle random offer
+    function toggleRandomOffer() {
+      isRandomOfferEnabled = !isRandomOfferEnabled;
+      const switchElement = document.getElementById('randomOfferSwitch');
+      const offerSelection = document.getElementById('offerSelection');
+      const offerCheckboxes = document.getElementById('offerCheckboxes');
+      const offerStats = document.getElementById('offerStats');
+      
+      if (isRandomOfferEnabled) {
+        switchElement.classList.add('active');
+        offerSelection.style.opacity = '0.5';
+        offerSelection.style.pointerEvents = 'none';
+        offerCheckboxes.classList.add('show');
+        offerStats.style.display = 'flex';
+      } else {
+        switchElement.classList.remove('active');
+        offerSelection.style.opacity = '1';
+        offerSelection.style.pointerEvents = 'auto';
+        offerCheckboxes.classList.remove('show');
+        offerStats.style.display = 'none';
+      }
+    }
+
+    function rand8() {
+      const c = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      let r = "";
+      for (let i = 0; i < 8; i++) {
+        r += c[Math.floor(Math.random() * c.length)];
+      }
+      return r;
+    }
+
+    // Define offers array
+    const offers = [
+      { id: 'offer1', url: "https://kramat11.github.io/landing-kahf-1766161652367/", name: "IMO", statId: 'imoStat', countId: 'imoCount' },
+      { id: 'offer2', url: "https://kramat11.github.io/KAHF", name: "TRAFEE", statId: 'trafeeStat', countId: 'trafeeCount' },
+      { id: 'offer3', url: "https://kramat11.github.io/coba3", name: "LP", statId: 'lpStat', countId: 'lpCount' }
+    ];
+
+    function generateRandom() {
+      const countInput = document.getElementById("linkCount");
+      const count = parseInt(countInput.value) || 100;
+      
+      if (count < 1) { showNotification("Jumlah link minimal 1!"); return; }
+      if (count > 1000) { showNotification("Jumlah link maksimal 1000!"); return; }
+      
+      let selectedOffers = [];
+      
+      if (isRandomOfferEnabled) {
+        // Get selected offers from checkboxes
+        selectedOffers = offers.filter(offer => {
+          return document.getElementById(offer.id).checked;
+        });
+        
+        // Check if at least one offer is selected
+        if (selectedOffers.length === 0) {
+          showNotification("Pilih minimal 1 offer untuk random!");
+          return;
+        }
+      } else {
+        // Use the selected offer from dropdown
+        const offerSelect = document.getElementById("offerSelect");
+        const selectedIndex = offerSelect.selectedIndex;
+        selectedOffers = [offers[selectedIndex]];
+      }
+      
+      const out = document.getElementById("randomOutput");
+      out.innerHTML = "";
+      window.randomLinks = "";
+      
+      // Initialize offer counters
+      const offerCounters = {};
+      offers.forEach(offer => {
+        offerCounters[offer.name] = 0;
+      });
+      
+      // Hide all offer stats initially
+      offers.forEach(offer => {
+        const statElement = document.getElementById(offer.statId);
+        if (statElement) {
+          statElement.style.display = 'none';
+        }
+      });
+      
+      // Show only selected offer stats
+      selectedOffers.forEach(offer => {
+        const statElement = document.getElementById(offer.statId);
+        if (statElement) {
+          statElement.style.display = 'block';
+        }
+      });
+      
+      // Generate links
+      for (let i = 0; i < count; i++) {
+        // Select a random offer from selected offers
+        const randomIndex = Math.floor(Math.random() * selectedOffers.length);
+        const selectedOffer = selectedOffers[randomIndex];
+        
+        // Increment counter for the selected offer
+        offerCounters[selectedOffer.name]++;
+        
+        const kode = rand8();
+        const link = `${selectedOffer.url}?${kode}`;
+        window.randomLinks += link + "\n";
+        out.innerHTML += `<a href="${link}" target="_blank">${link}</a>`;
+      }
+      
+      // Update offer stats if random is enabled
+      if (isRandomOfferEnabled) {
+        selectedOffers.forEach(offer => {
+          const countElement = document.getElementById(offer.countId);
+          if (countElement) {
+            countElement.textContent = offerCounters[offer.name];
+          }
+        });
+      }
+      
+      // Show result and copy button
+      document.getElementById("randomResult").style.display = "block";
+      document.getElementById("copyRandomBtn").style.display = "block";
+      
+      let notificationMessage;
+      if (isRandomOfferEnabled) {
+        const offerNames = selectedOffers.map(o => o.name).join(', ');
+        notificationMessage = `Berhasil generate ${count} link dengan random offer: ${offerNames}!`;
+      } else {
+        const offerSelect = document.getElementById("offerSelect");
+        notificationMessage = `Berhasil generate ${count} link dengan offer: ${offerSelect.options[offerSelect.selectedIndex].text.split(' - ')[1]}`;
+      }
+      
+      showNotification(notificationMessage);
+    }
+
+    function copyRandom() {
+      navigator.clipboard.writeText(window.randomLinks);
+      showNotification("Link berhasil dicopy!");
+    }
+
+    function convertToFB() {
+      const text = document.getElementById("inputLinks").value.trim();
+      if (!text) { showNotification("Paste link dulu!"); return; }
+      
+      const links = text.split("\n").map(l => l.trim()).filter(Boolean);
+      const out = document.getElementById("fbOutput");
+      out.innerHTML = "";
+      window.fbLinks = "";
+      
+      links.forEach(link => {
+        const encoded = encodeURIComponent(link);
+        const fbLink = `https://web.facebook.com/l.php?u=${encoded}`;
+        window.fbLinks += fbLink + "\n";
+        out.innerHTML += `<a href="${fbLink}" target="_blank">${fbLink}</a>`;
+      });
+      
+      // Show result and copy button
+      document.getElementById("fbResult").style.display = "block";
+      document.getElementById("copyFbBtn").style.display = "block";
+    }
+
+    function copyFB() {
+      navigator.clipboard.writeText(window.fbLinks);
+      showNotification("Semua link FB berhasil dicopy!");
+    }
+
+    function convertToWlRaw() {
+      const text = document.getElementById("inputWl").value.trim();
+      if (!text) { showNotification("Tempel link dulu!"); return; }
+      
+      const links = text.split("\n").map(l => l.trim()).filter(Boolean);
+      const out = document.getElementById("wlOutput");
+      out.innerHTML = "";
+      window.wlRawLinks = "";
+      
+      links.forEach(link => {
+        const wlLink = "https://l.wl.co/l?u=" + link;
+        window.wlRawLinks += wlLink + "\n";
+        out.innerHTML += `<a href="${wlLink}" target="_blank">${wlLink}</a>`;
+      });
+      
+      // Show result and copy button
+      document.getElementById("wlResult").style.display = "block";
+      document.getElementById("copyWlBtn").style.display = "block";
+    }
+
+    function copyWlRaw() {
+      navigator.clipboard.writeText(window.wlRawLinks);
+      showNotification("Semua link l.wl.co (raw) berhasil dicopy!");
+    }
+    
+    // Custom notification instead of alert
+    function showNotification(message, type = 'success') {
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: ${type === 'success' ? 'var(--gradient-success)' : type === 'error' ? 'var(--danger)' : 'var(--gradient-primary)'};
+        color: white;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-weight: 600;
+        box-shadow: var(--shadow-lg);
+        z-index: 10000;
+        font-size: 0.8rem;
+      `;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.remove();
+      }, 2000);
+    }
 
     // Function to generate random full name
     function randomFullName() {
@@ -2068,463 +2401,61 @@
       generateUsernames();
     }
 
-    // Modal Functions
-    function openModal(modalId) {
-      document.getElementById(modalId).style.display = 'block';
-      document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
-      
-      // Initialize generator modal if opened
-      if (modalId === 'generatorModal') {
-        // Initialize after a short delay to ensure elements are available
-        setTimeout(() => {
-          initializeGenerator();
-        }, 100);
-      }
-      
-      // Initialize OTP modal if opened
-      if (modalId === 'otpModal') {
-        setTimeout(() => {
-          initializeOtpModal();
-        }, 100);
-      }
-    }
-    
-    function closeModal(modalId) {
-      document.getElementById(modalId).style.display = 'none';
-      document.body.style.overflow = 'auto'; // Enable scrolling again
-    }
-    
-    // Close modal when clicking outside of it
-    window.onclick = function(event) {
-      if (event.target.classList.contains('modal')) {
-        event.target.style.display = 'none';
-        document.body.style.overflow = 'auto';
-      }
-    }
-    
-    // Theme Management
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    updateThemeButtons(savedTheme);
-    
-    function setTheme(theme) {
-      document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-      updateThemeButtons(theme);
-    }
-    
-    function updateThemeButtons(theme) {
-      const lightBtn = document.getElementById('lightBtn');
-      const darkBtn = document.getElementById('darkBtn');
-      
-      if (theme === 'light') {
-        lightBtn.classList.add('active');
-        darkBtn.classList.remove('active');
-      } else {
-        darkBtn.classList.add('active');
-        lightBtn.classList.remove('active');
-      }
-    }
-    
-    // Login credentials
-    const USERNAME = 'kramat';
-    const PASSWORD = 'kramat113';
-    
-    // Check if user is already logged in
-    document.addEventListener('DOMContentLoaded', () => {
-      if (sessionStorage.getItem('isLoggedIn') === 'true') {
-        showMainPage();
-      } else {
-        showLoginPage();
-      }
-      
-      // Disable right click, copy, paste, and developer tools
-      document.addEventListener('contextmenu', e => {
-        if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') {
-          return;
-        }
-        e.preventDefault();
-        return false;
-      });
-
-      ['copy', 'cut', 'paste'].forEach(event => {
-        document.addEventListener(event, e => {
-          if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') {
-            return;
-          }
-          e.preventDefault();
-          return false;
-        });
-      });
-
-      document.addEventListener('keydown', e => {
-        if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') {
-          return;
-        }
-
-        if (e.key === 'F12') {
-          e.preventDefault();
-          return false;
-        }
-        if (e.ctrlKey && e.shiftKey && e.key === 'I') {
-          e.preventDefault();
-          return false;
-        }
-        if (e.ctrlKey && e.shiftKey && e.key === 'J') {
-          e.preventDefault();
-          return false;
-        }
-        if (e.ctrlKey && e.key === 'u') {
-          e.preventDefault();
-          return false;
-        }
-      });
-    });
-    
-    // Login form submission
-    document.getElementById('loginForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-      
-      if (username === USERNAME && password === PASSWORD) {
-        sessionStorage.setItem('isLoggedIn', 'true');
-        showMainPage();
-      } else {
-        document.getElementById('loginError').style.display = 'block';
-        setTimeout(() => {
-          document.getElementById('loginError').style.display = 'none';
-        }, 3000);
-      }
-    });
-    
-    // Logout function
-    function logout() {
-      sessionStorage.removeItem('isLoggedIn');
-      showLoginPage();
-    }
-    
-    // Show login page
-    function showLoginPage() {
-      document.getElementById('loginPage').style.display = 'block';
-      document.getElementById('mainPage').style.display = 'none';
-      document.getElementById('logoutBtn').style.display = 'none';
-    }
-    
-    // Show main page
-    function showMainPage() {
-      document.getElementById('loginPage').style.display = 'none';
-      document.getElementById('mainPage').style.display = 'block';
-      document.getElementById('logoutBtn').style.display = 'block';
-    }
-
-    // Toggle random offer
-    let isRandomOfferEnabled = false;
-    
-    function toggleRandomOffer() {
-      isRandomOfferEnabled = !isRandomOfferEnabled;
-      const switchElement = document.getElementById('randomOfferSwitch');
-      const offerSelection = document.getElementById('offerSelection');
-      const offerCheckboxes = document.getElementById('offerCheckboxes');
-      const offerStats = document.getElementById('offerStats');
-      
-      if (isRandomOfferEnabled) {
-        switchElement.classList.add('active');
-        offerSelection.style.opacity = '0.5';
-        offerSelection.style.pointerEvents = 'none';
-        offerCheckboxes.classList.add('show');
-        offerStats.style.display = 'flex';
-      } else {
-        switchElement.classList.remove('active');
-        offerSelection.style.opacity = '1';
-        offerSelection.style.pointerEvents = 'auto';
-        offerCheckboxes.classList.remove('show');
-        offerStats.style.display = 'none';
-      }
-    }
-
-    function rand8() {
-      const c = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      let r = "";
-      for (let i = 0; i < 8; i++) {
-        r += c[Math.floor(Math.random() * c.length)];
-      }
-      return r;
-    }
-
-    // Define offers array
-    const offers = [
-      { id: 'offer1', url: "https://kramat11.github.io/landing-kahf-1766161652367/", name: "IMO", statId: 'imoStat', countId: 'imoCount' },
-      { id: 'offer2', url: "https://kramat11.github.io/KAHF", name: "TRAFEE", statId: 'trafeeStat', countId: 'trafeeCount' },
-      { id: 'offer3', url: "https://kramat11.github.io/coba3", name: "LP", statId: 'lpStat', countId: 'lpCount' }
-    ];
-
-    function generateRandom() {
-      const countInput = document.getElementById("linkCount");
-      const count = parseInt(countInput.value) || 100;
-      
-      if (count < 1) { showNotification("Jumlah link minimal 1!"); return; }
-      if (count > 1000) { showNotification("Jumlah link maksimal 1000!"); return; }
-      
-      let selectedOffers = [];
-      
-      if (isRandomOfferEnabled) {
-        // Get selected offers from checkboxes
-        selectedOffers = offers.filter(offer => {
-          return document.getElementById(offer.id).checked;
-        });
-        
-        // Check if at least one offer is selected
-        if (selectedOffers.length === 0) {
-          showNotification("Pilih minimal 1 offer untuk random!");
-          return;
-        }
-      } else {
-        // Use the selected offer from dropdown
-        const offerSelect = document.getElementById("offerSelect");
-        const selectedIndex = offerSelect.selectedIndex;
-        selectedOffers = [offers[selectedIndex]];
-      }
-      
-      const out = document.getElementById("randomOutput");
-      out.innerHTML = "";
-      window.randomLinks = "";
-      
-      // Initialize offer counters
-      const offerCounters = {};
-      offers.forEach(offer => {
-        offerCounters[offer.name] = 0;
-      });
-      
-      // Hide all offer stats initially
-      offers.forEach(offer => {
-        const statElement = document.getElementById(offer.statId);
-        if (statElement) {
-          statElement.style.display = 'none';
-        }
-      });
-      
-      // Show only selected offer stats
-      selectedOffers.forEach(offer => {
-        const statElement = document.getElementById(offer.statId);
-        if (statElement) {
-          statElement.style.display = 'block';
-        }
-      });
-      
-      // Generate links
-      for (let i = 0; i < count; i++) {
-        // Select a random offer from selected offers
-        const randomIndex = Math.floor(Math.random() * selectedOffers.length);
-        const selectedOffer = selectedOffers[randomIndex];
-        
-        // Increment counter for the selected offer
-        offerCounters[selectedOffer.name]++;
-        
-        const kode = rand8();
-        const link = `${selectedOffer.url}?${kode}`;
-        window.randomLinks += link + "\n";
-        out.innerHTML += `<a href="${link}" target="_blank">${link}</a>`;
-      }
-      
-      // Update offer stats if random is enabled
-      if (isRandomOfferEnabled) {
-        selectedOffers.forEach(offer => {
-          const countElement = document.getElementById(offer.countId);
-          if (countElement) {
-            countElement.textContent = offerCounters[offer.name];
-          }
-        });
-      }
-      
-      // Show result and copy button
-      document.getElementById("randomResult").style.display = "block";
-      document.getElementById("copyRandomBtn").style.display = "block";
-      
-      let notificationMessage;
-      if (isRandomOfferEnabled) {
-        const offerNames = selectedOffers.map(o => o.name).join(', ');
-        notificationMessage = `Berhasil generate ${count} link dengan random offer: ${offerNames}!`;
-      } else {
-        const offerSelect = document.getElementById("offerSelect");
-        notificationMessage = `Berhasil generate ${count} link dengan offer: ${offerSelect.options[offerSelect.selectedIndex].text.split(' - ')[1]}`;
-      }
-      
-      showNotification(notificationMessage);
-    }
-
-    function copyRandom() {
-      navigator.clipboard.writeText(window.randomLinks);
-      showNotification("Link berhasil dicopy!");
-    }
-
-    function convertToFB() {
-      const text = document.getElementById("inputLinks").value.trim();
-      if (!text) { showNotification("Paste link dulu!"); return; }
-      
-      const links = text.split("\n").map(l => l.trim()).filter(Boolean);
-      const out = document.getElementById("fbOutput");
-      out.innerHTML = "";
-      window.fbLinks = "";
-      
-      links.forEach(link => {
-        const encoded = encodeURIComponent(link);
-        const fbLink = `https://web.facebook.com/l.php?u=${encoded}`;
-        window.fbLinks += fbLink + "\n";
-        out.innerHTML += `<a href="${fbLink}" target="_blank">${fbLink}</a>`;
-      });
-      
-      // Show result and copy button
-      document.getElementById("fbResult").style.display = "block";
-      document.getElementById("copyFbBtn").style.display = "block";
-    }
-
-    function copyFB() {
-      navigator.clipboard.writeText(window.fbLinks);
-      showNotification("Semua link FB berhasil dicopy!");
-    }
-
-    function convertToWlRaw() {
-      const text = document.getElementById("inputWl").value.trim();
-      if (!text) { showNotification("Tempel link dulu!"); return; }
-      
-      const links = text.split("\n").map(l => l.trim()).filter(Boolean);
-      const out = document.getElementById("wlOutput");
-      out.innerHTML = "";
-      window.wlRawLinks = "";
-      
-      links.forEach(link => {
-        const wlLink = "https://l.wl.co/l?u=" + link;
-        window.wlRawLinks += wlLink + "\n";
-        out.innerHTML += `<a href="${wlLink}" target="_blank">${wlLink}</a>`;
-      });
-      
-      // Show result and copy button
-      document.getElementById("wlResult").style.display = "block";
-      document.getElementById("copyWlBtn").style.display = "block";
-    }
-
-    function copyWlRaw() {
-      navigator.clipboard.writeText(window.wlRawLinks);
-      showNotification("Semua link l.wl.co (raw) berhasil dicopy!");
-    }
-    
-    // Custom notification instead of alert
-    function showNotification(message, type = 'success') {
-      const notification = document.createElement('div');
-      notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: ${type === 'success' ? 'var(--gradient-success)' : type === 'error' ? 'var(--danger)' : 'var(--gradient-primary)'};
-        color: white;
-        padding: 10px 20px;
-        border-radius: 6px;
-        font-weight: 600;
-        box-shadow: var(--shadow-lg);
-        z-index: 10000;
-        font-size: 0.8rem;
-      `;
-      notification.textContent = message;
-      document.body.appendChild(notification);
-      
-      setTimeout(() => {
-        notification.remove();
-      }, 2000);
-    }
-    
-    // OTP Instagram Multi Functions
-    let numbersList = [];
-    let countriesList = [];
-    let operatorsList = [];
-    let otpCheckIntervals = {};
-    
-    // Initialize OTP Modal
-    async function initializeOtpModal() {
+    // Initialize OTP Content
+    async function initializeOtpContent() {
       const apiKey = document.getElementById('apiKey').value.trim();
       
-      if (apiKey) {
-        await loadCountries(apiKey);
+      if (apiKey && !instagramServiceId) {
+        await loadInstagramService(apiKey);
       }
       
       // Add event listener for API key input
       document.getElementById('apiKey').addEventListener('change', async (e) => {
         const newApiKey = e.target.value.trim();
         if (newApiKey) {
-          await loadCountries(newApiKey);
-        }
-      });
-      
-      // Add event listener for country select
-      document.getElementById('countrySelect').addEventListener('change', async (e) => {
-        const countryId = e.target.value;
-        const apiKey = document.getElementById('apiKey').value.trim();
-        
-        if (countryId && apiKey) {
-          await loadOperators(apiKey, countryId);
+          await loadInstagramService(newApiKey);
         }
       });
     }
-    
-    // Load countries from API
-    async function loadCountries(apiKey) {
+
+    // Load Instagram service ID
+    async function loadInstagramService(apiKey) {
       try {
-        const response = await fetch(`https://otpcepat.org/api/handler_api.php?api_key=${apiKey}&action=getCountries`);
+        // Indonesia country ID is typically 0 or another ID, we'll use 0 as default
+        const response = await fetch(`https://otpcepat.org/api/handler_api.php?api_key=${apiKey}&action=getServices&country_id=0`);
         const data = await response.json();
         
         if (data.status === "true") {
-          countriesList = data.data;
-          const countrySelect = document.getElementById('countrySelect');
-          countrySelect.innerHTML = '<option value="">Pilih Negara</option>';
+          // Find Instagram service with price 650
+          const instagramService = data.data.find(service => 
+            service.serviceName.toLowerCase().includes('instagram') && service.price === '650'
+          );
           
-          countriesList.forEach(country => {
-            const option = document.createElement('option');
-            option.value = country.countryID;
-            option.textContent = country.countryName;
-            countrySelect.appendChild(option);
-          });
+          if (instagramService) {
+            instagramServiceId = instagramService.serviceID;
+            console.log('Instagram service ID found:', instagramServiceId);
+          } else {
+            console.warn('Instagram service with price 650 not found');
+            // Fallback to any Instagram service
+            const anyInstagramService = data.data.find(service => 
+              service.serviceName.toLowerCase().includes('instagram')
+            );
+            if (anyInstagramService) {
+              instagramServiceId = anyInstagramService.serviceID;
+              console.log('Using fallback Instagram service ID:', instagramServiceId);
+            }
+          }
         } else {
-          showStatusMessage(`Gagal memuat negara: ${data.msg}`, 'error');
+          console.error('Failed to load services:', data.msg);
         }
       } catch (error) {
-        console.error('Error loading countries:', error);
-        showStatusMessage('Terjadi kesalahan saat memuat negara. Periksa API Key Anda.', 'error');
+        console.error('Error loading Instagram service:', error);
       }
     }
-    
-    // Load operators from API
-    async function loadOperators(apiKey, countryId) {
-      try {
-        const response = await fetch(`https://otpcepat.org/api/handler_api.php?api_key=${apiKey}&action=getOperators&country_id=${countryId}`);
-        const data = await response.json();
-        
-        if (data.status === "true") {
-          operatorsList = data.data;
-          const operatorSelect = document.getElementById('operatorSelect');
-          operatorSelect.innerHTML = '<option value="">Pilih Operator</option>';
-          operatorSelect.disabled = false;
-          
-          operatorsList.forEach(operator => {
-            const option = document.createElement('option');
-            option.value = operator;
-            option.textContent = operator;
-            operatorSelect.appendChild(option);
-          });
-        } else {
-          showStatusMessage(`Gagal memuat operator: ${data.msg}`, 'error');
-        }
-      } catch (error) {
-        console.error('Error loading operators:', error);
-        showStatusMessage('Terjadi kesalahan saat memuat operator.', 'error');
-      }
-    }
-    
+
     // Get multiple numbers
     async function getMultipleNumbers() {
       const apiKey = document.getElementById('apiKey').value.trim();
-      const countryId = document.getElementById('countrySelect').value;
-      const operatorId = document.getElementById('operatorSelect').value;
       const quantity = parseInt(document.getElementById('numberQuantity').value);
       
       if (!apiKey) {
@@ -2532,14 +2463,12 @@
         return;
       }
       
-      if (!countryId) {
-        showStatusMessage('Silakan pilih negara terlebih dahulu!', 'error');
-        return;
-      }
-      
-      if (!operatorId) {
-        showStatusMessage('Silakan pilih operator terlebih dahulu!', 'error');
-        return;
+      if (!instagramServiceId) {
+        await loadInstagramService(apiKey);
+        if (!instagramServiceId) {
+          showStatusMessage('Gagal memuat layanan Instagram. Periksa API Key Anda.', 'error');
+          return;
+        }
       }
       
       if (!quantity || quantity < 1 || quantity > 50) {
@@ -2556,7 +2485,7 @@
         const promises = [];
         
         for (let i = 0; i < quantity; i++) {
-          const promise = getSingleNumber(apiKey, countryId, operatorId, i + 1);
+          const promise = getSingleNumber(apiKey, '0', 'random', instagramServiceId, i + 1);
           promises.push(promise);
         }
         
@@ -2596,11 +2525,11 @@
         document.getElementById('getNumbersBtn').disabled = false;
       }
     }
-    
+
     // Get single number
-    async function getSingleNumber(apiKey, countryId, operatorId, index) {
+    async function getSingleNumber(apiKey, countryId, operatorId, serviceId, index) {
       try {
-        const response = await fetch(`https://otpcepat.org/api/handler_api.php?api_key=${apiKey}&action=get_order&operator_id=${operatorId}&service_id=ig&country_id=${countryId}`);
+        const response = await fetch(`https://otpcepat.org/api/handler_api.php?api_key=${apiKey}&action=get_order&operator_id=${operatorId}&service_id=${serviceId}&country_id=${countryId}`);
         const data = await response.json();
         
         if (data.status === true) {
@@ -2622,7 +2551,7 @@
         throw error;
       }
     }
-    
+
     // Get OTP for single number
     async function getSingleOtp(orderId) {
       const apiKey = document.getElementById('apiKey').value.trim();
@@ -2670,7 +2599,7 @@
         throw error;
       }
     }
-    
+
     // Start auto OTP checking for all numbers
     function startAutoOtpChecking() {
       numbersList.forEach(number => {
@@ -2683,7 +2612,7 @@
         }
       });
     }
-    
+
     // Get all OTP
     async function getAllOtp() {
       const waitingNumbers = numbersList.filter(n => n.status === 'Waiting SMS');
@@ -2716,7 +2645,7 @@
         showStatusMessage('Terjadi kesalahan saat mengambil OTP.', 'error');
       }
     }
-    
+
     // Cancel single number
     async function cancelSingleNumber(orderId) {
       const apiKey = document.getElementById('apiKey').value.trim();
@@ -2753,7 +2682,7 @@
         showStatusMessage('Terjadi kesalahan saat membatalkan nomor.', 'error');
       }
     }
-    
+
     // Cancel all numbers
     async function cancelAllNumbers() {
       const activeNumbers = numbersList.filter(n => n.status !== 'Cancelled');
@@ -2785,19 +2714,19 @@
         showStatusMessage('Terjadi kesalahan saat membatalkan nomor.', 'error');
       }
     }
-    
+
     // Copy single number
     function copySingleNumber(number) {
       navigator.clipboard.writeText(number);
       showNotification(`Nomor ${number} berhasil disalin!`);
     }
-    
+
     // Copy single OTP
     function copySingleOtp(otp) {
       navigator.clipboard.writeText(otp);
       showNotification(`OTP ${otp} berhasil disalin!`);
     }
-    
+
     // Export numbers data
     function exportNumbers() {
       if (numbersList.length === 0) {
@@ -2824,7 +2753,7 @@
       
       showStatusMessage('Data berhasil diekspor!', 'success');
     }
-    
+
     // Update numbers table
     function updateNumbersTable() {
       const tableBody = document.getElementById('numbersTableBody');
@@ -2883,7 +2812,7 @@
         tableBody.appendChild(row);
       });
     }
-    
+
     // Update button states
     function updateButtonStates() {
       const hasActiveNumbers = numbersList.some(n => n.status !== 'Cancelled');
@@ -2894,7 +2823,7 @@
       document.getElementById('cancelAllBtn').disabled = !hasActiveNumbers;
       document.getElementById('exportBtn').disabled = !hasNumbers;
     }
-    
+
     // Show status message
     function showStatusMessage(message, type) {
       const statusElement = document.getElementById('statusMessage');
@@ -2907,36 +2836,6 @@
         statusElement.style.display = 'none';
       }, 5000);
     }
-    
-    // Reset OTP UI when modal is closed
-    document.addEventListener('DOMContentLoaded', () => {
-      const otpModal = document.getElementById('otpModal');
-      const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-          if (mutation.attributeName === 'style' && otpModal.style.display === 'none') {
-            // Clear all intervals
-            Object.keys(otpCheckIntervals).forEach(orderId => {
-              clearInterval(otpCheckIntervals[orderId]);
-            });
-            otpCheckIntervals = {};
-            
-            // Reset data
-            numbersList = [];
-            countriesList = [];
-            operatorsList = [];
-            
-            // Reset UI
-            document.getElementById('countrySelect').innerHTML = '<option value="">Pilih Negara</option>';
-            document.getElementById('operatorSelect').innerHTML = '<option value="">Pilih Operator</option>';
-            document.getElementById('operatorSelect').disabled = true;
-            updateNumbersTable();
-            updateButtonStates();
-          }
-        });
-      });
-      
-      observer.observe(otpModal, { attributes: true });
-    });
   </script>
 </body>
 </html>
